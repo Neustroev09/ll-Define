@@ -1,9 +1,9 @@
-  .bodyStyle {
+.bodyStyle {
     background-color: #fff;
   }
 
   .headerToolbar {
-    margin: 1% 0% 0% 0%;
+    margin: 1% 0% 2% 0%;
     background-color: fff;
     position: relative;
     height: 5%;
@@ -74,7 +74,8 @@
   }
 
   .liText:hover { 
-    border-bottom: 4px solid #b0dddc
+    border-bottom: 4px solid #b0dddc;
+    color: #888;
   }
 
   .signinButton {

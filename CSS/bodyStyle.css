@@ -1,3 +1,7 @@
+.selector-for-some-widget {
+    box-sizing: content-box;
+  }
+
 .mainLogo {
     display: flex; 
     justify-content: space-around;
@@ -126,3 +130,50 @@
     color: #000;
     height: 50%;
 }
+
+.basicButtons {
+    display: flex;
+    align-items: center;
+    min-height: 30%; 
+    min-height: 30vh;
+}
+
+.basicButtons button{
+    height: 60px;
+    min-width: 140px;
+    min-height: 70px;
+    width: 100%;
+    border-radius: 22px;
+    border: 1px solid #b0dddc;
+    background-color: #b0dddc;
+    font-family: Montserrat-Bold;
+    font-size: 17px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #fff;
+    cursor: pointer;
+}
+
+.basicButtons button:hover { 
+    background: #7bd3d1;
+    background-color: #7bd3d1;
+    color: #fff;
+    transition: 0.35s;
+  }
+
+  .readerArea {
+    display: flex;
+    min-height: 85%; 
+    min-height: 85vh;
+    width: 50%;
+    border: 1px solid #000;
+    padding: 10px 20px 20px 20px;
+  }
+
+  .readerArea p {
+    text-align:justify;
+    line-height: 2;
+  }
