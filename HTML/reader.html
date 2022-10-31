@@ -24,43 +24,42 @@
 </head>
 
 <body class="bodyStyle">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white headerToolbar">
+        <div class="container-fluid">            
+            <p class="navbar-brand logoName offset-1"><img src="../image/logo.png" class="logoImg">II Define</p>
 
-    <header class="headerToolbar">
-        <div class="headMenu">
-            <span class="logo">
-                <img src="../image/logo.png" class="logoImg">
-                <p class="logoName">II Define</p>
-            </span>
-            <span class="list">
-                <ul>
-                    <li>
-                        <a href="main.html" class="liText">О нас</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" 
+                                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse list" id="navbarToggler">
+                <ul class="navbar-nav w-100 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link liText" href="main.html">О нас</a>
                     </li>
-
-                    <li>
-                        <a href="selectionOfBooks.html" class="liText">Подборка книг</a>
+                    <li class="nav-item">
+                        <a class="nav-link liText" href="selectionOfBooks.html">Подборка книг</a>
                     </li>
-
-                    <li>
-                        <a href="downloadTheBook.html"
-                        style="font-family: Montserrat-Bold;
+                    <li class="nav-item">
+                        <a class="nav-link liText" href="downloadTheBook.html" style="font-family: Montserrat-Bold;
                         font-size: 16px;
                         font-weight: bold;
                         color: #000;
                         border-bottom: 4px solid #b0dddc">
                         Загрузить книгу</a>
                     </li>
-
-                    <li>
-                        <a href="passTheTest.html" class="liText">Пройти тест</a>
+                    <li class="nav-item">
+                        <a class="nav-link liText" href="passTheTest.html">Пройти тест</a>
                     </li>
                 </ul>
-            </span>
-            <span class="signinButton">
-                <button>Login</button>
-            </span>
+
+                <form class=" signinButton d-flex">
+                    <button class="btn signinButton">Login</button>
+                </form>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <div class="container-fluid"> 
         <div class="row justify-content-center align-items-center basicButtons">
