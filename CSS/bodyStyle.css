@@ -164,16 +164,52 @@
     transition: 0.35s;
   }
 
-  .readerArea {
-    display: flex;
-    min-height: 85%; 
-    min-height: 85vh;
-    width: 50%;
+.readerArea {
+    width: 100%;
+    margin: 0%;
+}
+
+.readerText {
+    min-height: 80%; 
+    min-height: 80vh;
+    width: 70%;
     border: 1px solid #000;
     padding: 10px 20px 20px 20px;
-  }
+}
 
-  .readerArea p {
+.readerText p {
     text-align:justify;
     line-height: 2;
-  }
+}
+
+.readerButtons {
+    padding: 0%;
+    min-width: 100px;
+    min-height: 60px;
+    margin: 20px 20px 10px 20px;
+}
+
+.readerButtons button{
+    width: 100px;
+    height: 60px;
+    border-radius: 35px;
+    border: 1px solid #b0dddc;
+    background-color: #b0dddc;
+    font-family: Montserrat-Bold;
+    font-size: 30px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #fff;
+    cursor: pointer;
+    padding: 0%;
+}
+
+.readerButtons button:hover { 
+    background: #7bd3d1;
+    background-color: #7bd3d1;
+    color: #fff;
+    transition: 0.35s;
+}

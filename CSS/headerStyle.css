@@ -33,6 +33,10 @@
     margin-left: 15%;
   }
 
+  .list ul {
+    margin-right: 15%;
+  }
+
   .list li {
     margin-left: 4%;
     margin-bottom: 5px;
