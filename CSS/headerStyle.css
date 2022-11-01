@@ -1,11 +1,11 @@
-.bodyStyle {
+  .bodyStyle {
     background-color: #fff;
   }
 
   .headerToolbar {
     margin: 0.5% 0% 1% 0%;
     background-color: fff;
-    width: 95%;
+    width: 100%;
   }
 
   .logoImg {
@@ -14,7 +14,8 @@
   
   .logoName {
     margin-top: 0%;
-    margin-right: 0%;
+    margin-right: 4%;
+    margin-left: 5%;
     margin-bottom: 5px;
     font-family: Montserrat-Bold;
     font-size: 27px;
@@ -30,15 +31,11 @@
   }
 
   .list {
-    margin-left: 15%;
-  }
-
-  .list ul {
-    margin-right: 15%;
+    margin-left: 0%;
+    width: 50%;
   }
 
   .list li {
-    margin-left: 4%;
     margin-bottom: 5px;
   }
   
@@ -61,9 +58,12 @@
 
   .signinButton {
     margin:auto;
+    width: 30%;
   }
 
   .signinButton button {
+    min-width: 100px;
+    max-width: 100px;
     border-radius: 18px;
     border: 3px solid #b0dddc;
     background-color: #fff;

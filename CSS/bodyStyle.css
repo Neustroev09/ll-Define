@@ -1,19 +1,11 @@
-.selector-for-some-widget {
-    box-sizing: content-box;
-  }
-
-.mainLogo {
-    display: flex; 
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap; 
-    margin: 0% 10% 0% 10%;
+.bodyStyle {
+    min-width: 100%;
 }
 
 .description {
-    min-width: 20%;
-    display: flex; 
-    flex-direction: column;
+    min-width: 410px;
+    width: 450px;
+    padding: 0px 0px 0px 35px;
 }
 
 .IIdefineText {
@@ -31,7 +23,7 @@
 }
 
 .dashImg {
-    width: 390px;
+    width: 380px;
     height: 21px;
 }
 
@@ -50,8 +42,10 @@
 }
 
 .laptopAndPhone {
-    min-width: 450px;
-    min-height: 450px;
+    min-width: 400px;
+    min-height: 400px;
+    max-width: 800px;
+    max-height: 800px;
     width: 50%;
     height: 50%;
     margin-top: 2%;
