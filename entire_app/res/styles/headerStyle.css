@@ -1,0 +1,107 @@
+.bodyStyle {
+    background-color: #fff;
+  }
+
+  .headerToolbar {
+    margin: 1% 0% 2% 0%;
+    background-color: fff;
+    position: relative;
+    height: 5%;
+    width: 100%;
+  }
+
+  .logo {
+    position: relative;
+    display: flex;
+    margin-right: 5%;
+  }
+
+  .logoImg {
+    height: 40px;
+    margin: 5% 10% 0% 0%;
+  }
+  
+  .logoName {
+    margin: 5% 0% 0% 0%; 
+    font-family: Montserrat-Bold;
+    font-size: 27.8px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .headMenu {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .list {
+    position: relative;
+    min-width: 50%;
+  }
+
+  .list ul, ul li, ul li a {
+    display: -webkit-box;
+  }
+  
+  .list ul {
+    padding: 0%;
+  }
+
+  .list ul li {
+    margin-left: 3%;
+    margin-right: 3%;
+    
+  }
+  
+  .list ul li a {
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .liText {
+    font-family: Montserrat-Bold;
+    font-size: 16px;
+    font-weight: 600;
+    color: #888;
+  }
+
+  .liText:hover { 
+    border-bottom: 4px solid #b0dddc;
+    color: #888;
+  }
+
+  .signinButton {
+    position: relative;
+  }
+
+  .signinButton button {
+    border-radius: 18px;
+    border: 3px solid #b0dddc;
+    background-color: #fff;
+    padding: 10% 10% 10% 10%;
+    font-family: Montserrat-Bold;
+    font-size: 19px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #b0dddc;
+    padding: 10% 35% 10% 35%;
+    cursor: pointer;
+  }
+
+  .signinButton button:hover { 
+    background: #b0dddc;
+    color: #fff;
+    transition: 0.35s;
+  }

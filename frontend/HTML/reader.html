@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Чтение книги</title>
+    <link rel="icon" href="../image/logo.png" type="image/icon type">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../CSS/headerStyle.css">
+    <link rel="stylesheet" href="../CSS/bodyStyle.css">
+    <style>
+        @font-face {
+        font-family: Montserrat-Bold; 
+        src: url(../fonts/Montserrat-Bold.ttf);
+        }
+
+        @font-face {
+        font-family: Montserrat-Medium; 
+        src: url(../fonts/Montserrat-Medium.ttf);
+        }
+    </style>
+</head>
+
+<body class="bodyStyle">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white headerToolbar">
+        <div class="container-fluid">            
+            <p class="navbar-brand logoName offset-1"><img src="../image/logo.png" class="logoImg">II Define</p>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" 
+                                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse list" id="navbarToggler">
+                <ul class="navbar-nav w-100 align-items-center justify-content-evenly">
+                    <li class="nav-item">
+                        <a class="nav-link liText" href="main.html">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link liText" href="selectionOfBooks.html">Подборка книг</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link liText" href="downloadTheBook.html" style="font-family: Montserrat-Bold;
+                        font-size: 16px;
+                        font-weight: bold;
+                        color: #000;
+                        border-bottom: 4px solid #b0dddc">
+                        Загрузить книгу</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link liText" href="passTheTest.html">Пройти тест</a>
+                    </li>
+                </ul>
+
+                <form class="signinButton d-flex">
+                    <button class="btn signinButton">Login</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid"> 
+        <div class="row justify-content-center align-items-center readerArea">
+            <div class="text-center col-8 col-sm-8 col-lg-8 readerText">
+                <p>
+                    “Listen, Mr. Dastych,” Detective Captain Mejzlik said pensively , “the truth of the matter is that I’ve come to you for advice. I have a certain case I don’t know what on earth to do about.”<br>
+                    “Out with it then,” said Mr. Dastych. “Whom does the case concern?”<br>
+                    “Me,” sighed Dr. Mejzlik. “The more I think about it, the less I understand it. You know, a person could go crazy just thinking about it.”<br>
+                    “So who did what to you?” Mr. Dastych asked in a soothing voice.<br>
+                    “Nobody,” Dr. Mejzlik burst out. “That’s the worst part of it. I myself did something that I don’t understand.”<br>
+                    “Perhaps it’s not all that bad,” old Dastych consoled him. “Just what did you do, young man?”<br>
+                    “I caught a safecracker,” Dr. Mejzlik answered gloomily.<br>
+                    “And that’s all?” “That’s all.”<br>
+                    “And perhaps he wasn’t the right safecracker,” Mr. Dastych said helpfully.<br>
+                    “But he was; in fact he’s already confessed. He broke into the safe at the Jewish Benevolent Association; did you hear about it? His name was Rozanowski or Rosenbaum or something, from Lvov,” grumbled Dr. Mejzlik. “They found the safecracking tools on him and everything.”<br>
+                    “Well then, what would you like to know?” old Dastych encouraged him.<br>
+                    “I would like to know,” the police captain began thoughtfully, “how it was I caught him. Wait, I’ll tell you just what happened. A month ago, it was March third, I was on duty till midnight. I don’t know if you remember, but it had been raining for three days straight.<br>
+                    So I stopped in at a coffee shop for a moment, and after that I meant to go right home, to Vinohrady. But instead of that I headed in the opposite direction, toward Dlazdena Street. Tell me, please, do you have any idea why I went straight to that part of town?”<br>
+                    “Perhaps it was merely by chance,” Mr. Dastych ventured.<br>
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center readerArea">
+            <div class="text-center col-1 readerButtons">
+                <button><</button>
+            </div>
+            <div class="text-center col-1 readerButtons">
+                <button>></button>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
