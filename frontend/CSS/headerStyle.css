@@ -1,0 +1,87 @@
+  .bodyStyle {
+    background-color: #fff;
+  }
+
+  .headerToolbar {
+    margin: 0.5% 0% 1% 0%;
+    background-color: fff;
+    width: 100%;
+  }
+
+  .logoImg {
+    height: 40px;
+  }
+  
+  .logoName {
+    margin-top: 0%;
+    margin-right: 4%;
+    margin-left: 5%;
+    margin-bottom: 5px;
+    font-family: Montserrat-Bold;
+    font-size: 27px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .list {
+    margin-left: 0%;
+    width: 50%;
+  }
+
+  .list li {
+    margin-bottom: 5px;
+  }
+  
+  .list ul li a {
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .liText {
+    font-family: Montserrat-Bold;
+    font-size: 16px;
+    font-weight: 600;
+    color: #888;
+  }
+
+  .liText:hover { 
+    border-bottom: 4px solid #b0dddc;
+    color: rgb(0, 0, 0);
+  }
+
+  .signinButton {
+    margin:auto;
+    width: 30%;
+  }
+
+  .signinButton button {
+    min-width: 100px;
+    max-width: 100px;
+    border-radius: 18px;
+    border: 3px solid #b0dddc;
+    background-color: #fff;
+    font-family: Montserrat-Bold;
+    font-size: 19px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #b0dddc;
+    cursor: pointer;
+  }
+
+  .signinButton button:hover { 
+    background: #b0dddc;
+    color: #fff;
+    border: 3px solid #b0dddc;
+    transition: 0.35s;
+  }
