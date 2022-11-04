@@ -1,64 +1,42 @@
-.bodyStyle {
+  .bodyStyle {
     background-color: #fff;
   }
 
   .headerToolbar {
-    margin: 1% 0% 2% 0%;
+    margin: 0.5% 0% 1% 0%;
     background-color: fff;
-    position: relative;
-    height: 5%;
     width: 100%;
-  }
-
-  .logo {
-    position: relative;
-    display: flex;
-    margin-right: 5%;
   }
 
   .logoImg {
     height: 40px;
-    margin: 5% 10% 0% 0%;
   }
   
   .logoName {
-    margin: 5% 0% 0% 0%; 
+    margin-top: 0%;
+    margin-right: 4%;
+    margin-left: 5%;
+    margin-bottom: 5px;
     font-family: Montserrat-Bold;
-    font-size: 27.8px;
+    font-size: 27px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
     text-align: center;
-    color: #000;
     white-space: nowrap;
     text-decoration: none;
-  }
-
-  .headMenu {
-    position: relative;
-    display: flex;
-    justify-content: space-evenly;
+    color: #000;
   }
 
   .list {
-    position: relative;
-    min-width: 50%;
+    margin-left: 0%;
+    width: 50%;
   }
 
-  .list ul, ul li, ul li a {
-    display: -webkit-box;
-  }
-  
-  .list ul {
-    padding: 0%;
-  }
-
-  .list ul li {
-    margin-left: 3%;
-    margin-right: 3%;
-    
+  .list li {
+    margin-bottom: 5px;
   }
   
   .list ul li a {
@@ -75,18 +53,20 @@
 
   .liText:hover { 
     border-bottom: 4px solid #b0dddc;
-    color: #888;
+    color: rgb(0, 0, 0);
   }
 
   .signinButton {
-    position: relative;
+    margin:auto;
+    width: 30%;
   }
 
   .signinButton button {
+    min-width: 100px;
+    max-width: 100px;
     border-radius: 18px;
     border: 3px solid #b0dddc;
     background-color: #fff;
-    padding: 10% 10% 10% 10%;
     font-family: Montserrat-Bold;
     font-size: 19px;
     font-weight: 800;
@@ -96,12 +76,12 @@
     letter-spacing: normal;
     text-align: center;
     color: #b0dddc;
-    padding: 10% 35% 10% 35%;
     cursor: pointer;
   }
 
   .signinButton button:hover { 
     background: #b0dddc;
     color: #fff;
+    border: 3px solid #b0dddc;
     transition: 0.35s;
   }
