@@ -10,6 +10,9 @@ import datetime
 import hashlib
 import json
 
+#apps
+from deflvl.deflvl import DefineLevelApp
+
 # максимальная длина одного HTTP заголовка
 MAX_LINE = 64*1024
 # максимальное количество HTTP заголовков
@@ -299,6 +302,25 @@ class MyHTTPServer:
                 else:
                     raise ServerError(404, f'dynamic_content: problems with number of url params')
         
+            if req.path == '/deflvl':
+                url_params = req.url.query.split('&')
+                if len(url_params) == 1:
+                    param_name, param_value = url_params[0].split('=')
+                    if param_name == 't':
+                        book_info = self.app.get_book_info_with_token(param_value)
+                        if book_info:
+                            with open('temp_store\\temp_books\\' + book_info['token'], 'r', encoding='utf-8') as temp_book:  
+                                book_text = temp_book.read()
+                                new_router_result = RouterResult(self.app.define.define_level(book_text), 'html')
+                        else:
+                            raise ServerError(404, f'dynamic_content: token {param_value} not found (deflvl)')
+                    else:
+                        raise ServerError(404, f'dynamic_content: problems with name of t parameter (deflvl)')
+                else:
+                    raise ServerError(404, f'dynamic_content: problems with number of url params (deflvl)')
+        
+        print(new_router_result.body)
+        
         return new_router_result
 
     # функция, добавляющая к возвращаемому контенту заголовки (заголовки ответа)
@@ -521,7 +543,8 @@ class RouterResult:
 
 
 class LLdefineApp:
-    def __init__(self):
+    def __init__(self, def_app):
+        self.define = def_app
         self.clear_temp_list()
 
     def load_book(self, client_id, book_name, book_type, book_text):
@@ -581,9 +604,12 @@ if __name__ == '__main__':
 
     # записываем основные параметры сервера
     host = '127.0.0.1'
-    port = 8080
+    port = 80
 
-    our_app_instance = LLdefineApp()
+    def_lvl_app = DefineLevelApp()
+    def_lvl_app.init_app()
+
+    our_app_instance = LLdefineApp(def_lvl_app)
 
     # создаем его объект
     serv = MyHTTPServer(host, port, our_app_instance)
