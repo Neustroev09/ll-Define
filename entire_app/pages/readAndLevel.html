@@ -75,7 +75,7 @@
     <div class="container-fluid"> 
         <div class="row justify-content-center align-items-center basicButtons">
             <div class="col-sm-3 col-md-3 col-lg-2 text-center">
-                <button>Узнать уровень<br>книги</button>
+                <button id='bt-def-lvl'>Узнать уровень<br>книги</button>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-2 text-center">
                 <form action="reader.html">
@@ -84,6 +84,43 @@
             </div>
         </div>
     </div>
+	
+	<div id="book-level-info"
+	style = "width: 100%;
+	text-align: center;">
+		<span
+		style = "font-family: Montserrat-Bold;
+		font-size: 100px;"></span>
+	</div>
     
+	
+	<script>
+		
+		var def_lvl_but = document.querySelector("#bt-def-lvl"),
+			book_lvl_info = document.querySelector("#book-level-info span");
+		
+		var xhr = new XMLHttpRequest();
+		
+		function dlbut_click() {
+		
+			var cur_url = window.location.href.split('?');
+			var t_param = cur_url[cur_url.length - 1];
+			xhr.open('GET', '/deflvl?' + t_param);
+			xhr.send();
+			xhr.onload = function() {
+				if (xhr.status != 200) {
+					book_lvl_info.textContent = 'XX'
+				} else { 
+					book_lvl_info.textContent = xhr.response
+				}
+			};
+		
+		}
+		
+		def_lvl_but.addEventListener('click', dlbut_click);
+		
+	</script>
+	
+	
 </body>
 </html>
