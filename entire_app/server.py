@@ -581,7 +581,7 @@ if __name__ == '__main__':
 
     # записываем основные параметры сервера
     host = '127.0.0.1'
-    port = 80
+    port = 8080
 
     our_app_instance = LLdefineApp()
 
