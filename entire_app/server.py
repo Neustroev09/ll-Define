@@ -26,6 +26,7 @@ source_translator = {
     '/act'          : ('html', 'pages\\readAndLevel.html'),
     '/r/s1.css'     : ('css', 'res\\styles\\headerStyle.css'),
     '/r/s2.css'     : ('css', 'res\\styles\\bodyStyle.css'),
+    '/r/s3.css'     : ('css', 'res\\styles\\testPageStyle.css'),
     '/r/p1.png'     : ('img', 'res\\images\\logo.png'),
     '/r/p2.png'     : ('img', 'res\\images\\dash.png'),
     '/r/p3.png'     : ('img', 'res\\images\\laptopAndPhone.png'),
@@ -37,6 +38,8 @@ source_translator = {
     '/r/p9.png'     : ('img', 'res\\images\\levelAnalysis.png'),
     '/r/f1.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Bold.ttf'),
     '/r/f2.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Medium.ttf'),
+    '/r/f3.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Light.ttf'),
+    '/r/f4.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Regular.ttf'),
 }
 
 def md5(some_str):

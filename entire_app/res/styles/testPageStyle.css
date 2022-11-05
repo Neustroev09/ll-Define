@@ -1,0 +1,98 @@
+.bodyStyle {
+  background-color: #fff;
+}
+
+.testExercisePage {
+  margin: 0% 10% 0% 10%;
+}
+
+.testExerciseTitle {
+  margin: auto;
+  font-family: Montserrat-Bold;
+  font-weight: 800;
+  font-size: 25px;
+  text-align: center;
+}
+
+.testExercise {
+  margin: auto;
+}
+
+.questionTitle {
+  font-family: Montserrat-Bold;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.testQuestion {
+  text-align: justify;
+  font-family: Montserrat-Regular;
+  font-size: 16px;
+}
+
+.testQuestion ul {
+  padding: 0%;
+}
+
+.testQuestion li {
+  list-style-type: none;
+}
+
+.customRadio {
+  width: 18px;
+  height: 18px;
+  border: 3px solid #9ad4d3;
+  margin: 2px;
+  background-color: #fff;
+}
+
+.labelRadio span {
+  margin: auto;
+}
+
+.customRadio:not(:disabled):active {
+  background-color: #9ad4d381;
+  border-color: #9ad4d385;
+}
+
+.customRadio:focus:not(:checked) {
+  border-color: #9ad4d35b;
+}
+
+.customRadio:focus {
+  box-shadow: 0 0 0 0rem #fff;
+}
+
+.customRadio:checked {
+  background-color: #000;
+  border: 3px solid #9ad4d3;
+  /* background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%234A4A4A'/%3E%3C/svg%3E"); */
+}
+
+.dropdownButton {
+  background-color: #fff;
+  border-radius: 15px;
+  border: 1px solid #000;
+  color: #000;
+  width: 130px;
+  height: 26px;
+  padding: 0px 0px 0px 12px;
+  margin: 0%;
+  display: inline-block;
+  font-family: Montserrat-Regular;
+  font-size: 14px;
+}
+
+.dropdownButton:hover {
+  color: #000;
+  background-color: #fff;
+  border-color: #000;
+}
+
+.dropdownButton:focus {
+  color: #000;
+  background-color: #fff;
+  border-color: #000;
+  box-shadow: 0 0 0 0.2rem #b0dddc;
+}
+
