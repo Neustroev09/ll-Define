@@ -45,6 +45,7 @@ source_translator = {
     '/r/f2.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Medium.ttf'),
     '/r/f3.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Light.ttf'),
     '/r/f4.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Regular.ttf'),
+    '/r/j1.js'      : ('js', 'res\\scripts\\downloadTheBookScript.js'),
 }
 
 def md5(some_str):
@@ -262,6 +263,8 @@ class MyHTTPServer:
                     router_result = self._router.image_file(site_source[1])       
                 elif site_source[0] == 'fnt':
                     router_result = self._router.font_file(site_source[1])  
+                elif site_source[0] == 'js':
+                    router_result = self._router.js_file(site_source[1])  
         
         if req.method == 'POST':
             if req.path == '/loadbook':
@@ -319,7 +322,7 @@ class MyHTTPServer:
                         if book_info:
                             with open('temp_store\\temp_books\\' + book_info['token'], 'r', encoding='utf-8') as temp_book:  
                                 book_text = temp_book.read()
-                                new_router_result = RouterResult(self.app.define.define_level(book_text), 'html')
+                                new_router_result = RouterResult(self.app.define.define_test(book_text), 'html')
                         else:
                             raise ServerError(404, f'dynamic_content: token {param_value} not found (deflvl)')
                     else:
@@ -327,7 +330,7 @@ class MyHTTPServer:
                 else:
                     raise ServerError(404, f'dynamic_content: problems with number of url params (deflvl)')
         
-        print(new_router_result.body)
+        #print(new_router_result.body)
         
         return new_router_result
 
@@ -376,6 +379,17 @@ class MyHTTPServer:
                 'otf' : 'application/x-font-opentype'
             }
             contentType = font_mime_translate[router_result.stype]
+            # заголовки ответа
+            headers = [('Content-Type', contentType),
+                       ('Content-Length', len(body))]
+            # возвращаем объект, который помимо заголовков и контента хранит в себе статус и сообщение (это составляющие строки ответа)
+            return Response(200, 'OK', headers, body)
+            
+        if router_result.type == 'js':
+            # переводим питоновскую строку в кодировку UTF-8
+            body = router_result.body.encode('utf-8')
+            # значение одного из заголовков, которое отвечает за тип контента
+            contentType = 'text/javascript; charset=utf-8'
             # заголовки ответа
             headers = [('Content-Type', contentType),
                        ('Content-Length', len(body))]
@@ -527,6 +541,13 @@ class Router:
         resp_body = file.read()
         file.close()
         return RouterResult(resp_body, 'font', file_loc.split('.')[-1])
+        
+    def js_file(self, script_loc):
+        file = io.open(script_loc, mode='r', encoding='utf-8')
+        resp_body = file.read()
+        file.close()
+        return RouterResult(resp_body, 'js')
+    
     
     # скелет для всех страничек с ошибками
     def error_page(self, status, body):
@@ -615,7 +636,7 @@ if __name__ == '__main__':
     port = 80
 
     def_lvl_app = DefineLevelApp()
-    def_lvl_app.init_app()
+    #def_lvl_app.init_app()
 
     our_app_instance = LLdefineApp(def_lvl_app)
 
