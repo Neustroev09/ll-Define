@@ -1,49 +1,21 @@
-# python3
 
 import socket
-import sys
-import io
+import json
 from email.parser import Parser
 from urllib.parse import parse_qs, urlparse
 
-import datetime
-import hashlib
-import json
-
-#apps
-from deflvl.deflvl import DefineLevelApp
+from router import Router, RouterResult
+from toolfuns import md5
+from errors import ServerError
+from server_packs import Response, Request
 
 # максимальная длина одного HTTP заголовка
 MAX_LINE = 64*1024
 # максимальное количество HTTP заголовков
 MAX_HEADERS = 100
 
-source_translator = {
-    '/'             : ('html', 'pages\\main.html'),
-    '/download'     : ('html', 'pages\\downloadTheBook.html'),
-    '/test'         : ('html', 'pages\\passTheTest.html'),
-    '/selection'    : ('html', 'pages\\selectionOfBooks.html'),
-    '/act'          : ('html', 'pages\\readAndLevel.html'),
-    '/r/s1.css'     : ('css', 'res\\styles\\headerStyle.css'),
-    '/r/s2.css'     : ('css', 'res\\styles\\bodyStyle.css'),
-    '/r/p1.png'     : ('img', 'res\\images\\logo.png'),
-    '/r/p2.png'     : ('img', 'res\\images\\dash.png'),
-    '/r/p3.png'     : ('img', 'res\\images\\laptopAndPhone.png'),
-    '/r/p4.png'     : ('img', 'res\\images\\bookLoading.png'),
-    '/r/p5.png'     : ('img', 'res\\images\\grammarAnalysis.png'),
-    '/r/p6.png'     : ('img', 'res\\images\\selectionLiterature.png'),
-    '/r/p7.png'     : ('img', 'res\\images\\translationWords.png'),
-    '/r/p8.png'     : ('img', 'res\\images\\testLevel.png'),
-    '/r/p9.png'     : ('img', 'res\\images\\levelAnalysis.png'),
-    '/r/f1.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Bold.ttf'),
-    '/r/f2.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Medium.ttf'),
-}
-
-def md5(some_str):
-    return str(hashlib.md5(some_str.encode()).hexdigest())
-
 # класс HTTP сервера
-class MyHTTPServer:
+class HTTPServer:
 
     # конструктор класса
     def __init__(self, host, port, app = None):
@@ -78,6 +50,7 @@ class MyHTTPServer:
                 self.serve_client(conn, md5(addres[0]))
                 #except Exception as e:
                 #    print('Client serving failed', e)
+                
         finally:
             # если что-то не так с кодом выше, то закрываем сокет и завершаем работу сервера
             serv_sock.close()
@@ -237,6 +210,11 @@ class MyHTTPServer:
         
         return body_obj
 
+    def st(self, source_key):
+        with open('source_translator.json', 'r', encoding='utf-8') as st: 
+            st_obj = json.load(st)
+            return tuple(st_obj[source_key])
+            
     # функция обрабатывыающая запрос пользователя (этот процесс иногда называют routing'ом)
     def route(self, req):
         # в router_result будет хранится возвращаемый контент и его тип(например, HTML страничка и ее тип 'html')
@@ -244,8 +222,8 @@ class MyHTTPServer:
         # если путь (все то, что находится в URL после https://iidefine.com) пуст или равен '/' и метод GET (классисеский метод, который используют браузеры для получаения страниц сайтов)
         
         if req.method == 'GET':
-            if req.path in source_translator:
-                site_source = source_translator[req.path]
+            site_source = self.st(req.path)
+            if site_source:
                 if site_source[0] == 'html':
                     router_result = self._router.html_page(site_source[1])
                 elif site_source[0] == 'css':
@@ -311,15 +289,13 @@ class MyHTTPServer:
                         if book_info:
                             with open('temp_store\\temp_books\\' + book_info['token'], 'r', encoding='utf-8') as temp_book:  
                                 book_text = temp_book.read()
-                                new_router_result = RouterResult(self.app.define.define_level(book_text), 'html')
+                                new_router_result = RouterResult(self.app.define.define_test(book_text), 'html')
                         else:
                             raise ServerError(404, f'dynamic_content: token {param_value} not found (deflvl)')
                     else:
                         raise ServerError(404, f'dynamic_content: problems with name of t parameter (deflvl)')
                 else:
                     raise ServerError(404, f'dynamic_content: problems with number of url params (deflvl)')
-        
-        print(new_router_result.body)
         
         return new_router_result
 
@@ -438,184 +414,3 @@ class MyHTTPServer:
                                      body)
         # отправляем ответ пользователю
         self.send_response(conn, resp)
-        
-
-# класс, объекты которого хранят данные клиентских запросов 
-class Request:
-    def __init__(self, client_ip_hashed, method, target, version, headers, rfile, body = None):
-        # захешированный ip пользователя
-        self.hashed_ip = client_ip_hashed
-        # метод запроса
-        self.method = method
-        # url запроса
-        self.target = target
-        # версия http протокола
-        self.version = version
-        # заголовки запроса
-        self.headers = headers
-        # файл, который используется для чтения запроса
-        self.rfile = rfile
-        
-        self.body = body
-        
-        # url, разбитый на части
-        self.url = urlparse(self.target)
-        # часть url, идущая после хоста
-        self.path = self.url.path
-
-    # функция, возвращающая тело запроса (если оно есть)
-    def body(self):
-        size = self.headers.get('Content-Length')
-        if not size:
-            return None
-        return self.rfile.read(size)
-
-# класс, объекты которого хранят данные ответов
-class Response:
-    def __init__(self, status, reason, headers=None, body=None):
-        # статус (часть строки ответа)
-        self.status = status
-        # расшифровка HTTP статуса ответа (часть строки ответа)
-        self.reason = reason
-        # заголовки ответа
-        self.headers = headers
-        # тело ответа (непосредственно контент страниц сайта)
-        self.body = body
-
-# класс, объекты которого создаются при возникновении каких-либо ошибок (обрабатываются функцией send_error, см. строку 70)
-class ServerError(Exception): 
-    def __init__(self, status, body=None):
-        # выполнение страндартной ошибки Python
-        super()
-        # добавляем к объекту стандартной ошибки статус и пояснение (где появилась ошибка и что она из себя представляет)
-        self.status = status
-        self.body = body
-
-# класс, методы которого возращают контент сайта (например, html странички)
-class Router:
-    def __init__(self):
-        pass
-    
-    def html_page(self, page_loc):
-        file = io.open(page_loc, mode='r', encoding='utf-8')
-        resp_body = file.read()
-        file.close()
-        return RouterResult(resp_body, 'html')
-    
-    def styles_file(self, file_loc):
-        file = io.open(file_loc, mode='r', encoding='utf-8')
-        resp_body = file.read()
-        file.close()
-        return RouterResult(resp_body, 'css')
-        
-    def image_file(self, file_loc):
-        file = io.open(file_loc, mode='rb')
-        resp_body = file.read()
-        file.close()
-        return RouterResult(resp_body, 'img', file_loc.split('.')[-1])
-        
-    def font_file(self, file_loc):
-        file = io.open(file_loc, mode='rb')
-        resp_body = file.read()
-        file.close()
-        return RouterResult(resp_body, 'font', file_loc.split('.')[-1])
-    
-    # скелет для всех страничек с ошибками
-    def error_page(self, status, body):
-        body = '<style>@font-face{font-family:Montserrat-Bold;src:url(../r/f1.ttf);}</style>' \
-            '<body style="font-family:Montserrat-Bold;color: #333;">' \
-            '<div style="width: 100%; text-align:center; margin-top:100px;">' \
-            f'<h1 style="font-size:6em;color:#b0dddc"><i>#lldefine{status}</i></h1><h2 style="font-size:3em">{body}</h2>' \
-            '</div></body>'
-        return RouterResult(body, 'html')
-        
-    def redirect(self, new_url):
-        return RouterResult(None, 'redirect', new_url)
-
-# результат выполнения методов класса Router
-class RouterResult:
-    def __init__(self, body, type, sub_type=None, err=None):
-        # контент
-        self.body = body
-        # тип контента
-        self.type = type
-        self.stype = sub_type
-
-
-class LLdefineApp:
-    def __init__(self, def_app):
-        self.define = def_app
-        self.clear_temp_list()
-
-    def load_book(self, client_id, book_name, book_type, book_text):
-        
-        token = self.constuct_token(client_id, book_name)
-        
-        if not self.get_book_info_with_token(token):
-            self.save_into_temp_list(client_id, book_name, book_type, book_text, token)
-            self.save_temp_book(token, book_text)
-            print('LLdefineApp: book with new token has been saved')
-        else:
-            print('LLdefineApp: book with such token already exists')
-            
-        return token
-        
-    def save_temp_book(self, token, book_text):
-    
-        with open('temp_store\\temp_books\\' + token, 'w+', encoding='utf-8') as new_temp_f:
-            new_temp_f.write(book_text)
-        
-    def save_into_temp_list(self, client_id, book_name, book_type, book_text, token):
-
-        with open('temp_store\\temp_store_list.json', 'r', encoding='utf-8') as temp_store_list_f:  
-            temp_store_list = json.load(temp_store_list_f)
-            if not temp_store_list:
-                temp_store_list = []
-            temp_store_list.append({'client': client_id, 'name': book_name, 'type': book_type, 'time': datetime.datetime.now(), 'token': token})
-            
-        with open('temp_store\\temp_store_list.json', 'w', encoding='utf-8') as temp_store_list_f:  
-            json.dump(temp_store_list, temp_store_list_f, ensure_ascii=False, default=str)
-
-    def clear_temp_list(self):
-        with open('temp_store\\temp_store_list.json', 'w', encoding='utf-8') as temp_store_list_f:  
-            json.dump([], temp_store_list_f, ensure_ascii=False)
-
-    def constuct_token(self, client_id, book_name):
-        return md5(client_id + book_name)
-        
-    def get_book_info_with_token(self, token):
-    
-        with open('temp_store\\temp_store_list.json', 'r', encoding='utf-8') as temp_store_list_f:  
-            temp_store_list = json.load(temp_store_list_f)
-            if temp_store_list:
-                ex_tokens = [x for x in temp_store_list if x['token'] == token]
-                if len(ex_tokens) == 0:
-                    return None
-                elif len(ex_tokens) == 1:
-                    return ex_tokens[0]
-                else:
-                    raise ServerError(500, f'get_book_info_with_token: several records with the same token in temp_store_list')
-        
-        return None
-    
-
-# если данный файл является основным (главный цикл питоновской программы)
-if __name__ == '__main__':
-
-    # записываем основные параметры сервера
-    host = '127.0.0.1'
-    port = 80
-
-    def_lvl_app = DefineLevelApp()
-    def_lvl_app.init_app()
-
-    our_app_instance = LLdefineApp(def_lvl_app)
-
-    # создаем его объект
-    serv = MyHTTPServer(host, port, our_app_instance)
-    
-    # и наконец запускаем
-    #try:
-    serv.serve_forever()
-    #except KeyboardInterrupt:
-    #    exit()
