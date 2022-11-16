@@ -25,7 +25,7 @@ class LLdefineApp:
         return token
         
     def save_temp_book(self, token, book_text):
-    
+        
         with open('temp_store\\temp_books\\' + token, 'w+', encoding='utf-8') as new_temp_f:
             new_temp_f.write(book_text)
         

@@ -62,9 +62,14 @@
         </div>
     </nav>
 
+	<div id="view_panel"></div>
 	<div id="viewer"></div>
 	
 	<style>
+		html {
+			overflow-y:scroll;
+		}
+	
 		.page_con{
 			text-align: justify;
 			font-size: 20px;
@@ -86,12 +91,27 @@
 			border-radius: 5px;
 			cursor:pointer;
 		}
+		
+		.rn_sldr {
+			width: 90%;
+			margin-left: 5%;
+		}
+		
 	</style>
 	
 	<script>
 		var first_book_page = 0, last_book_page = #BOOK_LAST_PAGE_NUMBER#
 		
-		var page_viewer = document.querySelector("#viewer");
+		var page_viewer = document.querySelector("#viewer"),
+			view_panel = document.querySelector("#view_panel");
+		
+		range_slider = document.createElement('input');
+		range_slider.className = 'rn_sldr';
+		
+		range_slider.setAttribute('type', 'range');
+		range_slider.setAttribute('min', 1);
+		range_slider.setAttribute('max', last_book_page + 1);
+		range_slider.setAttribute('value', 1);
 		
 		var current_page = 0
 		
@@ -133,50 +153,60 @@
 							flat_html_page += '</p>';
 						}
 						page_container.innerHTML = flat_html_page;
+						
+						page_viewer.appendChild(page_container);
+						
+						function next_page(){
+							if (current_page < last_book_page) {
+								current_page += 1;
+								render_viewer();
+							}
+						}
+						
+						function previous_page(){
+							if (current_page > 0) {
+								current_page -= 1;
+								render_viewer();
+							}
+						}
+						
+						var buttons_panel = document.createElement('div');
+						buttons_panel.className = 'but_pan';
+						
+						if (current_page > 0) {
+							var prev_page_but = document.createElement('span');
+							prev_page_but.className = 'cng_page';
+							prev_page_but.innerHTML = '< Сюда';
+							prev_page_but.addEventListener('click', previous_page);
+							buttons_panel.appendChild(prev_page_but);
+						}
+						
+						if (current_page < last_book_page) {
+							var next_page_but = document.createElement('span');
+							next_page_but.className = 'cng_page';
+							next_page_but.innerHTML = 'Туда >';
+							next_page_but.addEventListener('click', next_page);
+							buttons_panel.appendChild(next_page_but);
+						}
+						
+						page_viewer.appendChild(buttons_panel);
+						
 					}
 				};
 			}
 			book_page_load();	
-			
-			page_viewer.appendChild(page_container);
-			
-			function next_page(){
-				if (current_page < last_book_page) {
-					current_page += 1;
-					render_viewer();
-				}
-			}
-			
-			function previous_page(){
-				if (current_page > 0) {
-					current_page -= 1;
-					render_viewer();
-				}
-			}
-			
-			var buttons_panel = document.createElement('div');
-			buttons_panel.className = 'but_pan';
-			
-			if (current_page > 0) {
-				var prev_page_but = document.createElement('span');
-				prev_page_but.className = 'cng_page';
-				prev_page_but.innerHTML = '< Сюда';
-				prev_page_but.addEventListener('click', previous_page);
-				buttons_panel.appendChild(prev_page_but);
-			}
-			
-			if (current_page < last_book_page) {
-				var next_page_but = document.createElement('span');
-				next_page_but.className = 'cng_page';
-				next_page_but.innerHTML = 'Туда >';
-				next_page_but.addEventListener('click', next_page);
-				buttons_panel.appendChild(next_page_but);
-			}
-			
-			page_viewer.appendChild(buttons_panel);
 		}
 		
 		render_viewer();
+		
+		range_slider.addEventListener("input", () => {
+			range_slider.setAttribute('title', range_slider.value);
+			current_page = range_slider.value - 1;
+			render_viewer();
+		});
+		
+		view_panel.appendChild(range_slider);
+		
 		
 	</script>
 	
