@@ -61,8 +61,10 @@
             </div>
         </div>
     </nav>
-
-	<div id="view_panel"></div>
+	
+	
+	<div id="view_panel">
+	</div>
 	<div id="viewer"></div>
 	
 	<style>
@@ -79,22 +81,37 @@
 		
 		.but_pan {
 			text-align: center;
-			margin-top: 50px;
+			margin-top: 10px;
+			width: 100%;
 			margin-bottom: 50px;
 		}
 		
 		.cng_page {
-			margin: 5px;
-			padding: 10px 40px;
+			margin: 5px 2%;
+			padding: 10px 5px;
+			width: 46%;
+			display:inline-block;
 			border: 2px solid #555;
 			color: #555;
+			font-weight: bold;
 			border-radius: 5px;
 			cursor:pointer;
 		}
 		
 		.rn_sldr {
-			width: 90%;
+			width: 80%;
 			margin-left: 5%;
+		}
+		
+		.page_num {
+			width: 5%;
+			margin-left: 2%;
+			outline: none;
+			text-align: right;
+		}
+		
+		.book_len {
+			
 		}
 		
 	</style>
@@ -111,9 +128,27 @@
 		range_slider.setAttribute('type', 'range');
 		range_slider.setAttribute('min', 1);
 		range_slider.setAttribute('max', last_book_page + 1);
-		range_slider.setAttribute('value', 1);
+		range_slider.value = 1;
 		
-		var current_page = 0
+		page_number = document.createElement('input')
+		page_number.className = 'page_num';
+		page_number.value = 1;
+		
+		page_number.setAttribute('type', 'text');
+		
+		book_len = document.createElement('span');
+		book_len.className = 'book_len';
+		book_len.innerHTML = ' из ' + (last_book_page + 1);
+				
+		var current_page = 0;
+		
+		function update_page_number() {
+			page_number.value = current_page + 1
+		}
+		
+		function update_range_slider () {
+			range_slider.value = current_page + 1
+		}
 		
 		function render_viewer() {
 		
@@ -159,6 +194,8 @@
 						function next_page(){
 							if (current_page < last_book_page) {
 								current_page += 1;
+								update_range_slider();
+								update_page_number();
 								render_viewer();
 							}
 						}
@@ -166,6 +203,8 @@
 						function previous_page(){
 							if (current_page > 0) {
 								current_page -= 1;
+								update_range_slider();
+								update_page_number();
 								render_viewer();
 							}
 						}
@@ -202,10 +241,26 @@
 		range_slider.addEventListener("input", () => {
 			range_slider.setAttribute('title', range_slider.value);
 			current_page = range_slider.value - 1;
+			update_page_number();
 			render_viewer();
 		});
 		
+		page_number.addEventListener("keydown", (e) => {
+			if (e.key == "Enter") {
+				if (page_number.value < 1) {
+					page_number.value = 1;
+				} else if (page_number.value > last_book_page) {
+					page_number.value = last_book_page + 1;
+				}
+				current_page = page_number.value - 1;
+				update_range_slider();
+				render_viewer();
+			}
+		});
+		
 		view_panel.appendChild(range_slider);
+		view_panel.appendChild(page_number);
+		view_panel.appendChild(book_len);
 		
 		
 	</script>
