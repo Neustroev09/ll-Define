@@ -2,11 +2,13 @@
 import datetime
 import json
 
+from toolfuns import md5
 from errors import ServerError
 
 class LLdefineApp:
-    def __init__(self, def_app):
+    def __init__(self, def_app, view_app):
         self.define = def_app
+        self.viewer = view_app
         self.clear_temp_list()
 
     def load_book(self, client_id, book_name, book_type, book_text):
@@ -59,4 +61,8 @@ class LLdefineApp:
                     raise ServerError(500, f'get_book_info_with_token: several records with the same token in temp_store_list')
         
         return None
-    
+        
+    def read_temp_book(self, token):
+        with open('temp_store\\temp_books\\' + token, 'r', encoding='utf-8') as temp_book:  
+            book_text = temp_book.read()
+            return book_text

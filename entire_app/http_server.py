@@ -213,7 +213,9 @@ class HTTPServer:
     def st(self, source_key):
         with open('source_translator.json', 'r', encoding='utf-8') as st: 
             st_obj = json.load(st)
-            return tuple(st_obj[source_key])
+            if source_key in st_obj:
+                return tuple(st_obj[source_key])
+            return None
             
     # функция обрабатывыающая запрос пользователя (этот процесс иногда называют routing'ом)
     def route(self, req):
@@ -280,16 +282,15 @@ class HTTPServer:
                 else:
                     raise ServerError(404, f'dynamic_content: problems with number of url params')
         
-            if req.path == '/deflvl':
+            elif req.path == '/deflvl':
                 url_params = req.url.query.split('&')
                 if len(url_params) == 1:
                     param_name, param_value = url_params[0].split('=')
                     if param_name == 't':
                         book_info = self.app.get_book_info_with_token(param_value)
                         if book_info:
-                            with open('temp_store\\temp_books\\' + book_info['token'], 'r', encoding='utf-8') as temp_book:  
-                                book_text = temp_book.read()
-                                new_router_result = RouterResult(self.app.define.define_test(book_text), 'html')
+                            book_text = self.app.read_temp_book(book_info['token'])
+                            new_router_result = RouterResult(self.app.define.define_test(book_text), 'html')
                         else:
                             raise ServerError(404, f'dynamic_content: token {param_value} not found (deflvl)')
                     else:
@@ -297,6 +298,43 @@ class HTTPServer:
                 else:
                     raise ServerError(404, f'dynamic_content: problems with number of url params (deflvl)')
         
+            elif req.path == '/read':
+                url_params = req.url.query.split('&')
+                if len(url_params) == 1:
+                    param_name, param_value = url_params[0].split('=')
+                    if param_name == 't':
+                        book_info = self.app.get_book_info_with_token(param_value)
+                        if book_info:
+                            book_len = self.app.viewer.book_len(book_info['token'])
+                            if not book_len:
+                                self.app.viewer.create_book(book_info['token'], self.app.read_temp_book(book_info['token']))
+                                book_len = self.app.viewer.book_len(book_info['token'])
+                            new_router_result.body = new_router_result.body\
+                                .replace('#BOOK_LAST_PAGE_NUMBER#', str(book_len - 1))
+                        else:
+                            raise ServerError(404, f'dynamic_content: token {param_value} not found (read)')
+                    else:
+                        raise ServerError(404, f'dynamic_content: problems with name of t parameter (read)')
+                else:
+                    raise ServerError(404, f'dynamic_content: problems with number of url params (read)')
+                    
+            elif req.path == '/pc':
+                url_params = req.url.query.split('&')
+                if len(url_params) == 2:
+                    param1_name, param1_value = url_params[0].split('=')
+                    param2_name, param2_value = url_params[1].split('=')
+                    if param1_name == 't' and param2_name == 'pn':
+                        book_info = self.app.get_book_info_with_token(param1_value)
+                        if book_info:
+                            page_content = self.app.viewer.load_page(book_info['token'], int(param2_value))
+                            new_router_result = RouterResult(json.dumps(page_content, default=lambda o: o.__dict__), 'html')
+                        else:
+                            raise ServerError(404, f'dynamic_content: token {param_value} not found (pc)')
+                    else:
+                        raise ServerError(404, f'dynamic_content: problems with name of parameters (pc)')
+                else:
+                    raise ServerError(404, f'dynamic_content: problems with number of url params (pc)')
+            
         return new_router_result
 
     # функция, добавляющая к возвращаемому контенту заголовки (заголовки ответа)
