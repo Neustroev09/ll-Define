@@ -176,7 +176,7 @@ class HTTPServer:
         body = raw_body
     
         try:
-            body = str(body, 'iso-8859-1')
+            body = str(body, 'utf-8')
             body = body[body.find('\r\n')+2:]
             body = body[:body.find('\r\n------')]
         except:
