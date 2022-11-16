@@ -4,6 +4,7 @@
     "/test"         : ["html", "pages\\passTheTest.html"],
     "/selection"    : ["html", "pages\\selectionOfBooks.html"],
     "/act"          : ["html", "pages\\readAndLevel.html"],
+	"/read"         : ["html", "pages\\read.html"],
     "/r/s1.css"     : ["css", "res\\styles\\headerStyle.css"],
     "/r/s2.css"     : ["css", "res\\styles\\bodyStyle.css"],
     "/r/p1.png"     : ["img", "res\\images\\logo.png"],
