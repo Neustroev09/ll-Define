@@ -10,7 +10,7 @@
   margin: auto;
   font-family: Montserrat-Bold;
   font-weight: 800;
-  font-size: 25px;
+  font-size: 22px;
   text-align: center;
 }
 
@@ -22,12 +22,18 @@
   font-family: Montserrat-Bold;
   font-weight: 600;
   font-size: 17px;
+  margin-bottom: 10px;
+  margin-top: 40px;
 }
 
-.testQuestion {
+.testQuestionName p{
+  margin-bottom: 10px;
+}
+
+.testQuestion p{
   text-align: justify;
   font-family: Montserrat-Regular;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .testQuestion ul {
@@ -64,7 +70,7 @@
 }
 
 .customRadio:checked {
-  background-color: #000;
+  background-color: rgb(121, 108, 108);
   border: 3px solid #9ad4d3;
   /* background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%234A4A4A'/%3E%3C/svg%3E"); */
 }
@@ -73,6 +79,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin-bottom: 20px;
 }
 
 .dropdownButton {
@@ -81,7 +88,7 @@
   border: 1px solid #000;
   color: #000;
   width: 130px;
-  height: 26px;
+  height: 25px;
   padding: 0px 0px 0px 12px;
   margin: 0%;
   display: inline-block;
@@ -99,15 +106,21 @@
   color: #000;
   background-color: #fff;
   border-color: #000;
-  box-shadow: 0 0 0 0.2rem #b0dddc;
+  box-shadow: 0 0 10px 0.2rem #b0dddc;
 }
 
+option {
+  font-family: Montserrat-Regular;
+  font-size: 14px;
+}
 
 
 .holder {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .audio.green-audio-player {

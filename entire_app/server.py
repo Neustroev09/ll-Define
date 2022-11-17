@@ -46,6 +46,12 @@ source_translator = {
     '/r/f3.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Light.ttf'),
     '/r/f4.ttf'     : ('fnt', 'res\\fonts\\Montserrat-Regular.ttf'),
     '/r/j1.js'      : ('js', 'res\\scripts\\downloadTheBookScript.js'),
+    '/r/j2.js'      : ('js', 'res\\scripts\\levelDetection.js'),
+    '/r/j3.js'      : ('js', 'res\\scripts\\audioPlayer.js'),
+    '/r/j4.js'      : ('js', 'res\\scripts\\testCheck.js'),
+    '/r/m1.mp3'      : ('mp3', 'res\\mp3\\beginner_elementary.mp3'),
+    '/r/m2.mp3'      : ('mp3', 'res\\mp3\\pre_intermediate_intermediate.mp3'),
+    '/r/m3.mp3'      : ('mp3', 'res\\mp3\\upper_intermediate_advanced.mp3'),
 }
 
 def md5(some_str):
@@ -264,8 +270,10 @@ class MyHTTPServer:
                 elif site_source[0] == 'fnt':
                     router_result = self._router.font_file(site_source[1])  
                 elif site_source[0] == 'js':
-                    router_result = self._router.js_file(site_source[1])  
-        
+                    router_result = self._router.js_file(site_source[1])
+                elif site_source[0] == 'mp3':
+                    router_result = self._router.mp3_file(site_source[1])
+
         if req.method == 'POST':
             if req.path == '/loadbook':
                 ref = req.headers.get('Referer')
@@ -390,6 +398,17 @@ class MyHTTPServer:
             body = router_result.body.encode('utf-8')
             # значение одного из заголовков, которое отвечает за тип контента
             contentType = 'text/javascript; charset=utf-8'
+            # заголовки ответа
+            headers = [('Content-Type', contentType),
+                       ('Content-Length', len(body))]
+            # возвращаем объект, который помимо заголовков и контента хранит в себе статус и сообщение (это составляющие строки ответа)
+            return Response(200, 'OK', headers, body)
+
+        if router_result.type == 'mp3':
+            # переводим питоновскую строку в кодировку UTF-8
+            body = router_result.body
+            # значение одного из заголовков, которое отвечает за тип контента
+            contentType =  f'mp3/{router_result.stype}'
             # заголовки ответа
             headers = [('Content-Type', contentType),
                        ('Content-Length', len(body))]
@@ -547,6 +566,12 @@ class Router:
         resp_body = file.read()
         file.close()
         return RouterResult(resp_body, 'js')
+
+    def mp3_file(self, file_loc):
+        file = io.open(file_loc, mode='rb')
+        resp_body = file.read()
+        file.close()
+        return RouterResult(resp_body, 'mp3', file_loc.split('.')[-1])
     
     
     # скелет для всех страничек с ошибками

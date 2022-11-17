@@ -8,10 +8,11 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+    
     <link rel="stylesheet" href="../r/s1.css" />
     <link rel="stylesheet" href="../r/s2.css" />
     <link rel="stylesheet" href="../r/s3.css" />
+    <script src="../r/j4.js"></script>
 	<style>
 		@font-face {
 			font-family: Montserrat-Bold; 
@@ -67,11 +68,14 @@
             </div>
         </div>
     </nav>
-
+    
     <div class="container-fluid">
         <div class="grid justify-content-center testExercisePage">
             <p class="col-0 col-sm-0 col-md-9 col-lg-7 justify-content-center testExerciseTitle">
-                Reading & Vocabulary<br><br>
+                Тестирование<br><br>
+            </p>
+            <p class="col-0 col-sm-0 col-md-9 col-lg-7 justify-content-center testExerciseTitle">
+                Reading & Vocabulary<br>
             </p>
 
             <div class="col-0 col-sm-0 col-md-9 col-lg-7 testExercise">
@@ -84,14 +88,14 @@
                     </div>
                         <p>
                             Many people are fond 
-                                <select class="form-select dropdownButton">
+                                <select class="form-select dropdownButton" id="questionSelect1_1">
                                     <option selected>выбрать</option>
                                     <option value="1">about</option>
                                     <option value="2">of</option>
                                     <option value="3">in</option>
                                 </select>
                             gardening but Jane is different from them – she 
-                                <select class="form-select dropdownButton">
+                                <select class="form-select dropdownButton" id="questionSelect1_2">
                                     <option selected>выбрать</option>
                                     <option value="1">plants</option>
                                     <option value="2">is planting</option>
@@ -152,14 +156,14 @@
                 <div class="testQuestion">
                     <p>
                         David is
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect3_1">
                                 <option selected>выбрать</option>
                                 <option value="1">a</option>
                                 <option value="2">the</option>
                                 <option value="3">-</option>
                             </select> 
                         typical man – he is 27 and works
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect3_2">
                                 <option selected>выбрать</option>
                                 <option value="1">as</option>
                                 <option value="2">in</option>
@@ -223,7 +227,7 @@
                         Adrian often travels around the world because he is a seaman. He bought 
                         a pack of cigarettes in every port his ship called at. He smoked a lot 
                         when he was younger but at the age of 30 he gave
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect5">
                                 <option selected>выбрать</option>
                                 <option value="1">up</option>
                                 <option value="2">away</option>
@@ -284,7 +288,7 @@
                         The word “stress” is very popular nowadays. Different articles and TV 
                         shows reveal the unpleasant truth about stress regularly. But often people 
                         do not
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect7_1">
                                 <option selected>выбрать</option>
                                 <option value="1">draw</option>
                                 <option value="2">pay</option>
@@ -292,7 +296,7 @@
                                 <option value="4">glue</option>
                             </select>
                         attention to many useful tips on how to
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect7_2">
                                 <option selected>выбрать</option>
                                 <option value="1">cope</option>
                                 <option value="2">solve</option>
@@ -305,7 +309,7 @@
                         <br>
                         Stress can be caused by any type of physical or emotional stimulus usually 
                         without us noticing it. Different factors can be the reason
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect7_3">
                                 <option selected>выбрать</option>
                                 <option value="1">of</option>
                                 <option value="2">about</option>
@@ -397,7 +401,7 @@
                 <div class="testQuestion">
                     <p>
                         Information is something that is increasingly often taken for
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect9_1">
                                 <option selected>выбрать</option>
                                 <option value="1">ride</option>
                                 <option value="2">instance</option>
@@ -408,7 +412,7 @@
                         Once a privilege of the wealthy and affluent, now it is available almost 
                         everywhere to everyone having access to the Internet. In ancient times 
                         people died to
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect9_2">
                                 <option selected>выбрать</option>
                                 <option value="1">reach</option>
                                 <option value="2">obtain</option>
@@ -416,7 +420,7 @@
                                 <option value="4">become</option>
                             </select>
                         information but now seem to be reluctant to
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect9_3">
                                 <option selected>выбрать</option>
                                 <option value="1">apply</option>
                                 <option value="2">use</option>
@@ -431,7 +435,7 @@
                         abundance of distractions like advertisements and tempting news blocks the 
                         choice of that needed piece of information virtually becomes a torture for 
                         many. Users go online with an intention of receiving knowledge but
-                            <select class="form-select dropdownButton">
+                            <select class="form-select dropdownButton" id="questionSelect9_4">
                                 <option selected>выбрать</option>
                                 <option value="1">go down</option>
                                 <option value="2">end up</option>
@@ -455,7 +459,7 @@
                     <ul>
                         <li>
                             <label class="labelRadio">
-                                <input class="form-check-input customRadio" type="radio" id="question10_1_radio_1" name="question10Radio">
+                                <input class="form-check-input customRadio" type="radio" id="question10_1_radio_1" name="question10_1Radio">
                                 <span>
                                     that information is only for rich and influential people.
                                 </span>
@@ -529,7 +533,7 @@
             </div>
 
             <p class="col-0 col-sm-0 col-md-9 col-lg-7 testExerciseTitle">
-                Listening<br><br>
+                <br>Listening<br>
             </p>
 
             <div class="col-0 col-sm-0 col-md-9 col-lg-7 testExercise">
@@ -572,10 +576,12 @@
                         </div>
                       </div>
                       <audio crossorigin>
-                        <source src="https://englex.ru/app/uploads/beginner_elementary.mp3?_=1" type="audio/mpeg">
+                        <source src="/r/m1.mp3" type="audio/mpeg">
                       </audio>
+                      
                     </div>
                 </div>
+                <script src="../r/j3.js"></script>
                 <div class="testQuestionName">
                     <p>Blackpool is situated in Spain.</p>
                 </div>
@@ -628,45 +634,45 @@
                 <p class="questionTitle">
                     12. Прослушайте запись и ответьте на вопросы
                 </p>
+                
                 <div class="holder">
                     <div class="audio green-audio-player">
-                    <div class="loading">
+                      <div class="loading">
                         <div class="spinner"></div>
-                    </div>
-                    <div class="play-pause-btn">  
+                      </div>
+                      <div class="play-pause-btn">  
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24">
-                        <path fill="#566574" fill-rule="evenodd" d="M18 12L0 24V0" class="play-pause-icon" id="playPause"/>
+                          <path fill="#566574" fill-rule="evenodd" d="M18 12L0 24V0" class="play-pause-icon" id="playPause"/>
                         </svg>
-                    </div>
-                
-                    <div class="controls">
+                      </div>
+                  
+                      <div class="controls">
                         <span class="current-time">0:00</span>
                         <div class="slider" data-direction="horizontal">
-                        <div class="progress">
+                          <div class="progress">
                             <div class="pin" id="progress-pin" data-method="rewind"></div>
-                        </div>
+                          </div>
                         </div>
                         <span class="total-time">0:00</span>
-                    </div>
-                
-                    <div class="volume">
+                      </div>
+                  
+                      <div class="volume">
                         <div class="volume-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="#566574" fill-rule="evenodd" d="M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z" id="speaker"/>
-                        </svg>
+                          </svg>
                         </div>
                         <div class="volume-controls hidden">
-                        <div class="slider" data-direction="vertical">
+                          <div class="slider" data-direction="vertical">
                             <div class="progress">
-                            <div class="pin" id="volume-pin" data-method="changeVolume"></div>
+                              <div class="pin" id="volume-pin" data-method="changeVolume"></div>
                             </div>
+                          </div>
                         </div>
-                        </div>
-                    </div>
-                
-                    <audio crossorigin>
-                        <source src="https://englex.ru/app/uploads/pre_intermediate_intermediate.mp3?_=2" type="audio/mpeg">
-                    </audio>
+                      </div>
+                      <audio crossorigin>
+                        <source src="/r/m2.mp3" type="audio/mpeg">
+                      </audio>
                     </div>
                 </div>
 
@@ -747,43 +753,42 @@
                 </p>
                 <div class="holder">
                     <div class="audio green-audio-player">
-                    <div class="loading">
+                      <div class="loading">
                         <div class="spinner"></div>
-                    </div>
-                    <div class="play-pause-btn">  
+                      </div>
+                      <div class="play-pause-btn">  
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24">
-                        <path fill="#566574" fill-rule="evenodd" d="M18 12L0 24V0" class="play-pause-icon" id="playPause"/>
+                          <path fill="#566574" fill-rule="evenodd" d="M18 12L0 24V0" class="play-pause-icon" id="playPause"/>
                         </svg>
-                    </div>
-                
-                    <div class="controls">
+                      </div>
+                  
+                      <div class="controls">
                         <span class="current-time">0:00</span>
                         <div class="slider" data-direction="horizontal">
-                        <div class="progress">
+                          <div class="progress">
                             <div class="pin" id="progress-pin" data-method="rewind"></div>
-                        </div>
+                          </div>
                         </div>
                         <span class="total-time">0:00</span>
-                    </div>
-                
-                    <div class="volume">
+                      </div>
+                  
+                      <div class="volume">
                         <div class="volume-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="#566574" fill-rule="evenodd" d="M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z" id="speaker"/>
-                        </svg>
+                          </svg>
                         </div>
                         <div class="volume-controls hidden">
-                        <div class="slider" data-direction="vertical">
+                          <div class="slider" data-direction="vertical">
                             <div class="progress">
-                            <div class="pin" id="volume-pin" data-method="changeVolume"></div>
+                              <div class="pin" id="volume-pin" data-method="changeVolume"></div>
                             </div>
+                          </div>
                         </div>
-                        </div>
-                    </div>
-                
-                    <audio crossorigin>
-                        <source src="https://englex.ru/app/uploads/pre_intermediate_intermediate.mp3?_=2" type="audio/mpeg">
-                    </audio>
+                      </div>
+                      <audio crossorigin>
+                        <source src="/r/m3.mp3" type="audio/mpeg">
+                      </audio>
                     </div>
                 </div>
                 <div class="testQuestionName">
@@ -867,7 +872,7 @@
             </div>
 
             <p class="col-0 col-sm-0 col-md-9 col-lg-7 testExerciseTitle">
-                Grammar<br><br>
+                <br>Grammar<br>
             </p>
 
             <div class="col-0 col-sm-0 col-md-9 col-lg-7 testExercise">
@@ -937,7 +942,6 @@
                         </li>
                     </ul>
                 </div>
-
 
                 <div class="testQuestionName">
                     <p>Moscow is ... than London.</p>
@@ -1359,14 +1363,16 @@
         </div>
 
         <div class="row justify-content-center basicButtons">
-            <div class="col-sm-3 col-md-3 col-lg-2 text-center">
+            <div class="col-sm-5 col-md-5 col-lg-2 text-center">
                 <form action="/result">
-                    <button>Проверить мои ответы</button>
+                    <button onclick="checkAnswer();">Проверить мои ответы</button>
                 </form>
             </div>
         </div>
 
     </div>
+
+
     
 </body>
 </html>
