@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="../r/s1.css" />
 	<link rel="stylesheet" href="../r/s2.css" />
+    <link rel="stylesheet" href="../r/s3.css" />
+    <script src="../r/j4.js"></script>
 	<style>
 		@font-face {
 			font-family: Montserrat-Bold; 
@@ -24,7 +26,7 @@
 	</style>
 </head>
 
-<body class="bodyStyle">
+<body class="bodyStyle" onload="definitionLevel()">
     <nav class="navbar navbar-expand-lg navbar-light bg-white headerToolbar">
         <div class="container-fluid">            
             <p class="navbar-brand logoName offset-1"><img src="../r/p1.png" class="logoImg">II Define</p>
@@ -43,15 +45,14 @@
                         <a class="nav-link liText" href="/selection">Подборка книг</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link liText" href="/download" style="font-family: Montserrat-Bold;
+                        <a class="nav-link liText" href="/download">Загрузить книгу</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link liText" href="/test" style="font-family: Montserrat-Bold;
                         font-size: 16px;
                         font-weight: bold;
                         color: #000;
-                        border-bottom: 4px solid #b0dddc">
-                        Загрузить книгу</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link liText" href="/test">Пройти тест</a>
+                        border-bottom: 4px solid #b0dddc">Пройти тест</a>
                     </li>
                 </ul>
 
@@ -62,36 +63,23 @@
         </div>
     </nav>
 
-    <div id="user-file-info"
-	style = "width: 100%;
-	margin-top: 100px;
-	text-align: center;">
-		<span
-		style = "font-family: Montserrat-Bold;
-		font-size: 16px;">
-		Книга <b>#BOOK_NAME#</b> загружена #BOOK_DATE# в #BOOK_TIME#.<br>Выбирете требуемое действие.</span>
-	</div>
-
     <div class="container-fluid"> 
-        <div class="row justify-content-center align-items-center basicButtons">
-            <div class="col-sm-3 col-md-3 col-lg-2 text-center">
-                <button id='bt-def-lvl'>Узнать уровень<br>книги</button>
+        <div class="row justify-content-center">      
+            <div class="col-sm-3 col-md-4 col-lg-5 text-center">
+                <h1>Результаты теста</h1>
+                <p>Поздравляем! Вы выполнили тест на уровень знания английского языка. Ниже приведены результаты.</p>
             </div>
-            <div class="col-sm-3 col-md-3 col-lg-2 text-center">
-                <button id='bt-read'>Читать книгу</button>
+        </div>
+
+        <div class="row justify-content-center">      
+            <div class="col-sm-3 col-md-4 col-lg-5 text-center">
+                <h3 id="yourLevel">Ваш уровень — <b>#Level</b>!</h3>
+                <p id="numberPoints">Набрано баллов: #Result из 40</p>
+                <p id="levelDescription" style="text-align: justify"></p>
             </div>
         </div>
     </div>
 	
-	<div id="book-level-info"
-	style = "width: 100%;
-	text-align: center;">
-		<span
-		style = "font-family: Montserrat-Bold;
-		font-size: 100px;"></span>
-	</div>
-    	
-    <script src="../r/j2.js"></script>
-
+	
 </body>
 </html>

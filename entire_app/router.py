@@ -36,6 +36,18 @@ class Router:
         resp_body = file.read()
         file.close()
         return RouterResult(resp_body, 'font', file_loc.split('.')[-1])
+
+    def js_file(self, script_loc):
+        file = io.open(script_loc, mode='r', encoding='utf-8')
+        resp_body = file.read()
+        file.close()
+        return RouterResult(resp_body, 'js')
+
+    def mp3_file(self, file_loc):
+        file = io.open(file_loc, mode='rb')
+        resp_body = file.read()
+        file.close()
+        return RouterResult(resp_body, 'mp3', file_loc.split('.')[-1])
     
     # скелет для всех страничек с ошибками
     def error_page(self, status, body):

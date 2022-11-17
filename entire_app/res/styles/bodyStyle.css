@@ -130,8 +130,8 @@
 .basicButtons {
     display: flex;
     align-items: center;
-    min-height: 30%; 
-    min-height: 30vh;
+    min-height: 20%; 
+    min-height: 20vh;
 }
 
 .basicButtons button{
@@ -151,6 +151,7 @@
     letter-spacing: normal;
     color: #fff;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 
 .basicButtons button:hover { 

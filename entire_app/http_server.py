@@ -234,7 +234,11 @@ class HTTPServer:
                     router_result = self._router.image_file(site_source[1])       
                 elif site_source[0] == 'fnt':
                     router_result = self._router.font_file(site_source[1])  
-        
+                elif site_source[0] == 'js':
+                    router_result = self._router.js_file(site_source[1])
+                elif site_source[0] == 'mp3':
+                    router_result = self._router.mp3_file(site_source[1])
+
         if req.method == 'POST':
             if req.path == '/loadbook':
                 ref = req.headers.get('Referer')
@@ -297,7 +301,7 @@ class HTTPServer:
                         raise ServerError(404, f'dynamic_content: problems with name of t parameter (deflvl)')
                 else:
                     raise ServerError(404, f'dynamic_content: problems with number of url params (deflvl)')
-        
+
             elif req.path == '/read':
                 url_params = req.url.query.split('&')
                 if len(url_params) == 1:
@@ -382,6 +386,28 @@ class HTTPServer:
                 'otf' : 'application/x-font-opentype'
             }
             contentType = font_mime_translate[router_result.stype]
+            # заголовки ответа
+            headers = [('Content-Type', contentType),
+                       ('Content-Length', len(body))]
+            # возвращаем объект, который помимо заголовков и контента хранит в себе статус и сообщение (это составляющие строки ответа)
+            return Response(200, 'OK', headers, body)
+            
+        if router_result.type == 'js':
+            # переводим питоновскую строку в кодировку UTF-8
+            body = router_result.body.encode('utf-8')
+            # значение одного из заголовков, которое отвечает за тип контента
+            contentType = 'text/javascript; charset=utf-8'
+            # заголовки ответа
+            headers = [('Content-Type', contentType),
+                       ('Content-Length', len(body))]
+            # возвращаем объект, который помимо заголовков и контента хранит в себе статус и сообщение (это составляющие строки ответа)
+            return Response(200, 'OK', headers, body)
+
+        if router_result.type == 'mp3':
+            # переводим питоновскую строку в кодировку UTF-8
+            body = router_result.body
+            # значение одного из заголовков, которое отвечает за тип контента
+            contentType =  f'mp3/{router_result.stype}'
             # заголовки ответа
             headers = [('Content-Type', contentType),
                        ('Content-Length', len(body))]

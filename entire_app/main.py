@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     # записываем основные параметры сервера
     host = '127.0.0.1'
-    port = 80
+    port = 8080
 
     def_lvl_app = DefineLevelApp()
     viewer_app = ViewerApp()
