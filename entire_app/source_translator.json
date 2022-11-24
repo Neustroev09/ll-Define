@@ -28,8 +28,7 @@
     "/r/f4.ttf"     : ["fnt", "res\\fonts\\Montserrat-Regular.ttf"],
     "/r/j1.js"      : ["js", "res\\scripts\\downloadTheBookScript.js"],
     "/r/j2.js"      : ["js", "res\\scripts\\levelDetection.js"],
-    "/r/j3.js"      : ["js", "res\\scripts\\audioPlayer.js"],
-    "/r/j4.js"      : ["js", "res\\scripts\\testCheck.js"],
+    "/r/j3.js"      : ["js", "res\\scripts\\testCheck.js"],
     "/r/m1.mp3"     : ["mp3", "res\\mp3\\beginner_elementary.mp3"],
     "/r/m2.mp3"     : ["mp3", "res\\mp3\\pre_intermediate_intermediate.mp3"],
     "/r/m3.mp3"     : ["mp3", "res\\mp3\\upper_intermediate_advanced.mp3"]
