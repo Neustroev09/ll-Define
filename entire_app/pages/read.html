@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="../r/s1.css" />
 	<link rel="stylesheet" href="../r/s2.css" />
+	<link rel="stylesheet" href="../r/s4.css" />
 	<style>
 		@font-face {
 			font-family: Montserrat-Bold; 
@@ -63,59 +64,17 @@
     </nav>
 	
 	
-	<div id="view_panel">
+	<div class="container-fluid"> 
+        <div class="row justify-content-center align-items-center">
+            <div class="col-11 col-sm-11 col-lg-7">
+				<div id="viewer"></div>
+				<hr>
+				<div id="view_panel"></div>
+			</div>
+		</div>
 	</div>
-	<div id="viewer"></div>
 	
-	<style>
-		html {
-			overflow-y:scroll;
-		}
-	
-		.page_con{
-			text-align: justify;
-			font-size: 20px;
-			padding: 20px;
-			
-		}
-		
-		.but_pan {
-			text-align: center;
-			margin-top: 10px;
-			width: 100%;
-			margin-bottom: 50px;
-		}
-		
-		.cng_page {
-			margin: 5px 2%;
-			padding: 10px 5px;
-			width: 46%;
-			display:inline-block;
-			border: 2px solid #555;
-			color: #555;
-			font-weight: bold;
-			border-radius: 5px;
-			cursor:pointer;
-		}
-		
-		.rn_sldr {
-			width: 80%;
-			margin-left: 5%;
-		}
-		
-		.page_num {
-			width: 5%;
-			margin-left: 2%;
-			outline: none;
-			text-align: right;
-		}
-		
-		.book_len {
-			
-		}
-		
-	</style>
-	
+	<!-- <script src="../r/j4.js"></script> -->
 	<script>
 		var first_book_page = 0, last_book_page = #BOOK_LAST_PAGE_NUMBER#
 		
@@ -135,7 +94,11 @@
 		page_number.value = 1;
 		
 		page_number.setAttribute('type', 'text');
-		
+
+		page_txt = document.createElement('span');
+		page_txt.className = 'book_len';
+		page_txt.innerHTML = 'Страница';
+
 		book_len = document.createElement('span');
 		book_len.className = 'book_len';
 		book_len.innerHTML = ' из ' + (last_book_page + 1);
@@ -212,18 +175,20 @@
 						var buttons_panel = document.createElement('div');
 						buttons_panel.className = 'but_pan';
 						
-						if (current_page > 0) {
+						if (current_page >= 0) {
 							var prev_page_but = document.createElement('span');
 							prev_page_but.className = 'cng_page';
-							prev_page_but.innerHTML = '< Сюда';
+							prev_page_but.innerHTML = '<< Назад';
 							prev_page_but.addEventListener('click', previous_page);
 							buttons_panel.appendChild(prev_page_but);
 						}
+
+						buttons_panel.appendChild(range_slider);
 						
-						if (current_page < last_book_page) {
+						if (current_page <= last_book_page) {
 							var next_page_but = document.createElement('span');
 							next_page_but.className = 'cng_page';
-							next_page_but.innerHTML = 'Туда >';
+							next_page_but.innerHTML = 'Далее >>';
 							next_page_but.addEventListener('click', next_page);
 							buttons_panel.appendChild(next_page_but);
 						}
@@ -258,11 +223,9 @@
 			}
 		});
 		
-		view_panel.appendChild(range_slider);
+		view_panel.appendChild(page_txt);
 		view_panel.appendChild(page_number);
 		view_panel.appendChild(book_len);
-		
-		
 	</script>
 	
 	
