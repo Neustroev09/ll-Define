@@ -1,4 +1,4 @@
-var first_book_page = 0, last_book_page = #BOOK_LAST_PAGE_NUMBER#
+var first_book_page = 0;
 		
 var page_viewer = document.querySelector("#viewer"),
     view_panel = document.querySelector("#view_panel");
