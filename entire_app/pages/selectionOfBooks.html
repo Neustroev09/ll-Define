@@ -62,8 +62,111 @@
         </div>
     </nav>
 
+    
+    <span class="titlePageGlob">
+        <h2>Подборка книг на английском языке</h2>
+    </span>
+
+    <span class="titlePage btnOffCanvas">
+        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onclick="crateOffCanvas()">
+            Открыть Фильтры
+        </button>
+    </span>
+    
+    
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-end">
+            <button type="button" class="btn-close text-reset" id="btnCloseOff" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+        </div>
+        <div class="offcanvas-body">
+
+        </div>
+    </div>
+
     <div class="container-fluid d-flex justify-content-center">
-        <div class="col-0 col-sm-0 col-md-10 col-lg-9 ">
+        <div class="filterBlock col-0 col-sm-0 col-md-1 col-lg-2">
+            <span>
+                <h3>Фильтры</h3>
+            </span>
+            <div>
+                <h5 class="filterTitle">Поиск книги по автору или названию</h5>
+                <span>
+                    <input class="inputText" type="text" placeholder="Введите текст">
+                </span>
+            </div>
+
+            <div class="filterList">
+                <a class="btn filterTitle" data-bs-toggle="collapse" href="#collapseGenre" role="button" aria-expanded="false" aria-controls="collapseGenre">Жанры</a>
+                <div class="collapse show" id="collapseGenre">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Фантастика" id="genreCheck">
+                        <label class="form-check-label" for="flexCheckDefault">Фантастика</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Детектив" id="genreCheck">
+                        <label class="form-check-label" for="flexCheckChecked">Детектив</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Приключения" id="genreCheck">
+                        <label class="form-check-label" for="flexCheckDefault">Приключения</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Роман" id="genreCheck">
+                        <label class="form-check-label" for="flexCheckDefault">Роман</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Сказка" id="genreCheck">
+                        <label class="form-check-label" for="flexCheckDefault">Сказка</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Ужасы" id="genreCheck">
+                        <label class="form-check-label" for="flexCheckDefault">Ужасы</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Биография" id="genreCheck">
+                        <label class="form-check-label" for="flexCheckDefault">Биография</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Драма" id="genreCheck">
+                        <label class="form-check-label" for="flexCheckDefault">Драма</label>
+                    </div>
+                </div>
+            </div>
+            <div class="filterList">
+                <a class="btn filterTitle" data-bs-toggle="collapse" href="#collapseDifficulty" role="button" aria-expanded="false" aria-controls="collapseDifficulty">Сложность</a>
+                <div class="collapse show" id="collapseDifficulty">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="A1" id="difficultyCheck">
+                        <label class="form-check-label" for="flexCheckDefault">A1</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="A2" id="difficultyCheck">
+                        <label class="form-check-label" for="flexCheckChecked">A2</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="B1" id="difficultyCheck">
+                        <label class="form-check-label" for="flexCheckDefault">B1</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="B2" id="difficultyCheck">
+                        <label class="form-check-label" for="flexCheckDefault">B2</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="C1" id="difficultyCheck">
+                        <label class="form-check-label" for="flexCheckDefault">C1</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="C2" id="difficultyCheck">
+                        <label class="form-check-label" for="flexCheckDefault">C2</label>
+                    </div>
+                </div>
+            </div>
+            <span class="spanBtn d-flex justify-content-center">
+                <button class="btnShow" onclick="filter()">Показать</button>
+            </span>
+        </div>
+
+        <div class="col-0 col-sm-0 col-md-9 col-lg-8">
             <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-center" id="cardsTable"></div>
         </div>
     </div>
@@ -82,7 +185,7 @@
             </div>
         </div>
     </div>
- 
+
     <script src="../r/j5.js"></script>
 
     <nav aria-label="Page navigation example">

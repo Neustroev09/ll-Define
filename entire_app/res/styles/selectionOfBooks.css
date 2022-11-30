@@ -1,5 +1,18 @@
+.titlePage {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.titlePageGlob {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 #cardsTable {
-    /* width: 80%; */
+
 } 
 
 col {
@@ -19,9 +32,15 @@ col {
     margin: 5px 0px 5px 0px;
 }
 
+.cardImgDiv {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
 .cardImg {
-    /* height: 100%;
-    width: 100%; */
+
 }
 
 .pagination li {
@@ -67,5 +86,79 @@ col {
     font-size: 17px;
     color: #fff;
     cursor: pointer;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
+
+.filterBlock {
+    
+}
+
+.offcanvas-body {
+    padding-left: 30px;
+}
+/* text-align: left; */
+.filterTitle {
+    font-family: Montserrat-Bold;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    width: 100%;
+    padding: 0px;
+    text-align: left;
+}
+
+.filterTitle:focus, .filterTitle:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+.inputText {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #000;
+    height: 40px;
+    outline:none;
+}
+
+.form-check-input:checked {
+    background-color: #b0dddc;
+}
+
+.form-check-input:focus, .form-check-input::before {
+    box-shadow:none !important;
+}
+
+.spanBtn {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.btnShow {
+    height: 50px;
+    width: 80%;
+    border-radius: 22px;
+    border: 1px solid #b0dddc;
+    background-color: #b0dddc;
+    font-family: Montserrat-Bold;
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.btnOffCanvas button {
+    font-family: Montserrat-Bold;
+    font-size: 17px;
+    border-bottom: 1px solid #000;
+    border-radius: 0px;
+}
+
+.btnOffCanvas button:focus, .btnOffCanvas button:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+ 
