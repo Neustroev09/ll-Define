@@ -6,10 +6,11 @@ from toolfuns import md5
 from errors import ServerError
 
 class LLdefineApp:
-    def __init__(self, def_app, translate_app, view_app):
+    def __init__(self, def_app, translate_app, grammar_app, view_app):
         self.define = def_app
         self.translate = translate_app
         self.viewer = view_app
+        self.grammar = grammar_app
         self.clear_temp_list()
 
     def load_book(self, client_id, book_name, book_type, book_text):
