@@ -36,6 +36,7 @@ function file_change_event() {
 		file_size_info = document.createElement('span');
 		file_size_info.textContent = "Размер файла: " + real_file.size / 1000. + " Кб";
 		file_info.appendChild(file_size_info);
+		load_button.disabled = false;
 	}
 }
 pseudo_button.addEventListener('change', file_change_event);

@@ -1,0 +1,75 @@
+html {
+    overflow-y:scroll;
+}
+
+.page_con{
+    text-align: justify;
+    font-size: 20px;
+    padding: 20px;
+    border: 2px solid #b0dddc;
+    border-radius: 8px;
+}
+
+.but_pan {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 100%;
+    font-family: Montserrat-Medium;
+    font-size: 15px;
+}
+
+.cng_page {
+    padding-bottom: 5px;
+    width: 90px;
+    display:inline-block;
+    border-bottom: 3px solid #b0dddc;
+    color: #000;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+#view_panel {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    font-family: Montserrat-Medium;
+    font-size: 15px;
+}
+
+.rn_sldr {
+    width: 60%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+input[type="range"]::-moz-range-progress {
+    -webkit-appearance: none;
+    color: #b0dddc;
+    background-color: #b0dddc;
+    background: #b0dddc;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #b0dddc;
+}
+
+hr:not([size]) {
+    height: 2px;
+    color: #000;
+}
+
+.page_num {
+    width: 40px;
+    height: 23px;
+    margin-left: 5px;
+    margin-right: 5px;
+    outline: none;
+    text-align: right;
+}
+
+.book_len {
+    
+}
