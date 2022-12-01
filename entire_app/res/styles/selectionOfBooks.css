@@ -1,0 +1,164 @@
+.titlePage {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.titlePageGlob {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#cardsTable {
+
+} 
+
+col {
+    margin: 3%;
+}
+
+.card {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.authorCard, .titleCard {
+    font-family: Montserrat-Medium;
+    font-size: 14px;
+    text-align: center;
+    margin: 5px 0px 5px 0px;
+}
+
+.cardImgDiv {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.cardImg {
+
+}
+
+.pagination li {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #b0dddc !Important;
+    border: solid 1px #b0dddc !Important;
+}
+
+.modal-dialog {
+    top: 25%;
+    transform: translate(-50%,-50%);
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0);
+    -moz-box-shadow: 0 5px 15px rgba(0,0,0,0);
+    -o-box-shadow: 0 5px 15px rgba(0,0,0,0);
+    box-shadow: 0 5px 15px rgba(0,0,0,0);
+}
+
+#modalLabel {
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#modalBody {
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.readButton {
+    height: 40px;
+    width: 70%;
+    border-radius: 22px;
+    border: 1px solid #b0dddc;
+    background-color: #b0dddc;
+    font-family: Montserrat-Medium;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.filterBlock {
+    
+}
+
+.offcanvas-body {
+    padding-left: 30px;
+}
+/* text-align: left; */
+.filterTitle {
+    font-family: Montserrat-Bold;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    width: 100%;
+    padding: 0px;
+    text-align: left;
+}
+
+.filterTitle:focus, .filterTitle:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+.inputText {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #000;
+    height: 40px;
+    outline:none;
+}
+
+.form-check-input:checked {
+    background-color: #b0dddc;
+}
+
+.form-check-input:focus, .form-check-input::before {
+    box-shadow:none !important;
+}
+
+.spanBtn {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.btnShow {
+    height: 50px;
+    width: 80%;
+    border-radius: 22px;
+    border: 1px solid #b0dddc;
+    background-color: #b0dddc;
+    font-family: Montserrat-Bold;
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.btnOffCanvas button {
+    font-family: Montserrat-Bold;
+    font-size: 17px;
+    border-bottom: 1px solid #000;
+    border-radius: 0px;
+}
+
+.btnOffCanvas button:focus, .btnOffCanvas button:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+ 
