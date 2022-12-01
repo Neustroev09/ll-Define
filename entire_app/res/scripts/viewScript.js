@@ -1,6 +1,8 @@
 
 var gl_translate_tooltip_visible = false,
-	gl_translate_tooltip_dom_obj = null;
+	gl_translate_tooltip_dom_obj = null,
+	gl_real_sr = '',
+	gl_page_container_obj = null;
 
 function some_script(last_book_page) {
 	
@@ -47,32 +49,6 @@ function some_script(last_book_page) {
 		T_flat_page = '',
 		T_flat_page_with_words = '',
 		T_flat_page_with_sens = '';
-
-	function json_to_flat(json_page, with_sen = false) {
-		res = '<p>';
-		is_in_parag = true;
-		for (var key in json_page) {
-			if (json_page.hasOwnProperty(key)) {
-				if (json_page[key].substring(0, 2) == "\n\n") {
-					if (is_in_parag) {
-						res += '</p><p>';
-					} else {
-						is_in_parag = true;
-						res += '<p>';
-					}
-				}
-				ex_class = '';
-				if (with_sen) {
-					ex_class = ' class="page_word" onclick="click_page_sen(' + key + ')" '
-				}
-				res += '<span name="s' + key + '"' + ex_class + '>' + json_page[key].trim().replace('\n\n', '<br>') + '.</span>';
-			}
-		}
-		if (is_in_parag) {
-			res += '</p>';
-		}
-		return res;
-	}
 	
 	function add_words_to_json(json_page) {
 		var new_page_obj = {},
@@ -106,6 +82,7 @@ function some_script(last_book_page) {
 			if (xhr.status != 200) {
 				page_container.textContent = '404'
 			} else { 
+				gl_real_sr = xhr.response;
 				T_server_response = JSON.parse(xhr.response);
 				T_flat_page = json_to_flat(T_server_response);
 				page_container.innerHTML = T_flat_page;
@@ -198,6 +175,7 @@ function some_script(last_book_page) {
 		page_container.className = 'page_con'
 		
 		page_viewer.appendChild(page_container);
+		gl_page_container_obj = page_container;
 		
 		function contol_update() {
 			update_range_slider();
@@ -309,6 +287,7 @@ function click_page_word (word) {
 		} else { 
 			tooltip.innerHTML = xhr.response;
 			word_el.appendChild(tooltip);
+			tooltip.style.opacity = '1';
 			tooltip.style.left = - (tooltip.offsetWidth - word_el.offsetWidth) / 2 + 'px';
 		}
 	}
@@ -338,5 +317,87 @@ function click_page_word (word) {
 }
 
 function click_page_sen (word) {
-	console.log(word);
+	var s_num = word.substring(1),
+		s_el = document.querySelector('.' + word);
+	var cur_url = window.location.href.split('?');
+	var t_param = cur_url[cur_url.length - 1];
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', '/gr?' + t_param + '&s=' + s_num);
+	console.log('/gr?' + t_param + '&s=' + s_num)
+	xhr.send();
+	xhr.onload = function render_page() {
+		if (xhr.status != 200) {
+			console.log('Some Error')
+		} else { 
+			gr_ts = JSON.parse(xhr.response);
+			page_j = JSON.parse(gl_real_sr);
+			prev_match_indx = 0;
+			new_sen = '';
+			word_counter = 0;
+			for (const t of gr_ts) {
+				cur_cl = 'tnswn' + word_counter
+				new_sen += page_j[s_num].substring(prev_match_indx, t['index'][0]);
+				new_sen += '<span class="tnsw0 ' + cur_cl + '" onmouseover="mov_tt(\'' + cur_cl + '\')" onmouseout="mou_tt(\'' + cur_cl + '\')" style="background:' + getRandomColor() + ';">' +
+								page_j[s_num].substring(t['index'][0], t['index'][1]) +
+								'<span class="tnsw0_tt" style="display:none;">' + t['tense'] + '</span>' +
+							'</span>';
+				prev_match_indx = t['index'][1];
+				word_counter += 1;
+			}
+			new_sen += page_j[s_num].substring(prev_match_indx);
+			page_j[s_num] = new_sen;
+			gl_page_container_obj.innerHTML = json_to_flat(page_j, true);
+		}
+	}
+}
+
+function mov_tt(word_cl){
+	var word = document.querySelector('.' + word_cl);
+	var word_tt = word.querySelector('.tnsw0_tt');
+	word_tt.style.display = 'block';
+	word_tt.style.left = - (word_tt.offsetWidth - word.offsetWidth) / 2 + 'px';
+	word_tt.style.opacity = '1';
+}
+
+function mou_tt(word_cl){
+	var word = document.querySelector('.' + word_cl);
+	var word_tt = word.querySelector('.tnsw0_tt');
+	word_tt.style.opacity = '0';
+	setTimeout(function(){word_tt.style.display = 'none';},200);
+}
+
+function getRandomColor() {
+	var letters = '56789ABCDEF';
+	var color = '#';
+	for (var i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 11)];
+	}
+	return color;
+}
+
+
+function json_to_flat(json_page, with_sen = false) {
+	res = '<p>';
+	is_in_parag = true;
+	for (var key in json_page) {
+		if (json_page.hasOwnProperty(key)) {
+			if (json_page[key].substring(0, 2) == "\n\n") {
+				if (is_in_parag) {
+					res += '</p><p>';
+				} else {
+					is_in_parag = true;
+					res += '<p>';
+				}
+			}
+			ex_class = '';
+			if (with_sen && json_page[key].search('tnsw0') == -1) {
+				ex_class = ' class="page_word" onclick="click_page_sen(\'s' + key + '\')" '
+			}
+			res += '<span name="s' + key + '"' + ex_class + '>' + json_page[key].trim().replace('\n\n', '<br>') + '.</span>';
+		}
+	}
+	if (is_in_parag) {
+		res += '</p>';
+	}
+	return res;
 }

@@ -335,7 +335,7 @@ class HTTPServer:
                             page_content = self.app.viewer.load_page(book_info['token'], int(param2_value))
                             new_router_result = RouterResult(json.dumps(page_content, default=lambda o: o.__dict__), 'html')
                         else:
-                            raise ServerError(404, f'dynamic_content: token {param_value} not found (pc)')
+                            raise ServerError(404, f'dynamic_content: token {param1_value} not found (pc)')
                     else:
                         raise ServerError(404, f'dynamic_content: problems with name of parameters (pc)')
                 else:
@@ -352,11 +352,33 @@ class HTTPServer:
                             page_content = self.app.translate.en2ru(param2_value)
                             new_router_result = RouterResult(page_content, 'html')
                         else:
-                            raise ServerError(404, f'dynamic_content: token {param_value} not found (pc)')
+                            raise ServerError(404, f'dynamic_content: token {param1_value} not found (e2r)')
                     else:
-                        raise ServerError(404, f'dynamic_content: problems with name of parameters (pc)')
+                        raise ServerError(404, f'dynamic_content: problems with name of parameters (e2r)')
                 else:
-                    raise ServerError(404, f'dynamic_content: problems with number of url params (pc)')
+                    raise ServerError(404, f'dynamic_content: problems with number of url params (e2r)')
+                    
+            elif req.path == '/gr':
+                url_params = req.url.query.split('&')
+                if len(url_params) == 2:
+                    param1_name, param1_value = url_params[0].split('=')
+                    param2_name, param2_value = url_params[1].split('=')
+                    if param1_name == 't' and param2_name == 's':
+                        book_info = self.app.get_book_info_with_token(param1_value)
+                        if book_info:
+                            book_sens = self.app.viewer.read_book(param1_value)['sentences']
+                            if param2_value in book_sens:
+                                page_content = book_sens[param2_value]
+                                page_content = self.app.grammar.tenses(page_content)
+                                new_router_result = RouterResult(json.dumps(page_content, default=lambda o: o.__dict__), 'html')
+                            else:
+                                raise ServerError(404, f'dynamic_content: sentence {param2_value} not found (gr)')
+                        else:
+                            raise ServerError(404, f'dynamic_content: token {param1_value} not found (gr)')
+                    else:
+                        raise ServerError(404, f'dynamic_content: problems with name of parameters (gr)')
+                else:
+                    raise ServerError(404, f'dynamic_content: problems with number of url params (gr)')
             
         return new_router_result
 
