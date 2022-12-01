@@ -6,6 +6,7 @@ var real_button = document.querySelector("#bt-select-book"),
 	file_info = document.querySelector("#user-file-info span"),
 	file_form = document.querySelector("#_fm_loadbook"),
 	load_button = document.querySelector("#bt-load-book");
+	loadBook = false;
 
 var pseudo_button_click = () => pseudo_button.click();
 real_button.addEventListener('click', pseudo_button_click);
@@ -35,8 +36,13 @@ function file_change_event() {
 		file_info.appendChild(document.createElement("br"));
 		file_size_info = document.createElement('span');
 		file_size_info.textContent = "Размер файла: " + real_file.size / 1000. + " Кб";
-		file_info.appendChild(file_size_info);
-		load_button.disabled = false;
+		file_info.appendChild(file_size_info); 
+		loadBook = true;
+		var toastLiveExample = document.getElementById('liveToast')
+		var toast = new bootstrap.Toast(toastLiveExample)
+		document.querySelector(".toast-body").innerHTML = 'Книга успешно загружена!';
+		document.querySelector(".toast-header").style = 'background-color: #d1e7dd; color: #000';
+    	toast.show()
 	}
 }
 pseudo_button.addEventListener('change', file_change_event);
@@ -45,5 +51,15 @@ function get_valid_file_mess (type) {
 	return valid_file_types.findIndex((vtype) => vtype == type);
 }
 
-var pseudo_form_submit = () => file_form.submit();
+function pseudo_form_submit() {
+	if (loadBook) {
+		file_form.submit();
+	} else {
+		var toastLiveExample = document.getElementById('liveToast')
+		var toast = new bootstrap.Toast(toastLiveExample)
+		document.querySelector(".toast-body").innerHTML = 'Книга не загружена!';
+		document.querySelector(".toast-header").style = 'background-color: #f8d7da; color: #000';
+		toast.show()
+	}
+}
 load_button.addEventListener('click', pseudo_form_submit);
