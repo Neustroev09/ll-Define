@@ -290,21 +290,34 @@ function click_page_word (word) {
 		gl_translate_tooltip_dom_obj = null;
 	}
 
-	var word_el = document.querySelector('.' + word);
-	console.log(word_el);
-	
-	var tooltip = document.createElement('span');
+	var word_el = document.querySelector('.' + word),
+		tooltip = document.createElement('span');
 	
 	tooltip.setAttribute('class', 'page_word_tooltip');
 	
-	tooltip.innerHTML = '][YЙ';
+	tooltip.innerHTML = 'перевод ...';
+	
+	var cur_url = window.location.href.split('?');
+	var t_param = cur_url[cur_url.length - 1];
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', '/e2r?' + t_param + '&w=' + word_el.innerHTML);
+	console.log('/e2r?' + t_param + '&w=' + word_el.innerHTML)
+	xhr.send();
+	xhr.onload = function render_page() {
+		if (xhr.status != 200) {
+			tooltip.innerHTML = 'Some Error'
+		} else { 
+			tooltip.innerHTML = xhr.response;
+			word_el.appendChild(tooltip);
+			tooltip.style.left = - (tooltip.offsetWidth - word_el.offsetWidth) / 2 + 'px';
+		}
+	}
 	
 	var tool_tip_show = true,
 		tool_tip_show_timer_id = null;
 		
 	word_el.onmouseover = function() {
 		if (tooltip) {
-			console.log('onmouseover');
 			if (tool_tip_show_timer_id) {
 				clearTimeout(tool_tip_show_timer_id);
 				tool_tip_show_timer_id = null;
@@ -314,15 +327,11 @@ function click_page_word (word) {
 	} 
 	word_el.onmouseout = function() {
 		if (tooltip) {
-			console.log('onmouseout');
 			tool_tip_show_timer_id = setTimeout(function(){
 				tooltip.style.opacity = '0'; 
 			}, 500);
 		}
 	} 
-
-	word_el.appendChild(tooltip);
-	tooltip.style.left = - (tooltip.offsetWidth - word_el.offsetWidth) / 2 + 'px';
 	
 	gl_translate_tooltip_visible = true;
 	gl_translate_tooltip_dom_obj = tooltip;

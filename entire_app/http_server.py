@@ -2,7 +2,7 @@
 import socket
 import json
 from email.parser import Parser
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, urlparse, unquote
 
 from router import Router, RouterResult
 from toolfuns import md5
@@ -126,6 +126,8 @@ class HTTPServer:
 
         # всего слов 3 - это HTTP метод, URL страницы и версия протокола
         method, target, ver = words
+        # декодим спец символы URL
+        target = unquote(target)
         # проверяем версию протокола 
         if ver != 'HTTP/1.1':
             raise ServerError(505, 'parse_request_line: HTTP version not supported')
@@ -332,6 +334,23 @@ class HTTPServer:
                         if book_info:
                             page_content = self.app.viewer.load_page(book_info['token'], int(param2_value))
                             new_router_result = RouterResult(json.dumps(page_content, default=lambda o: o.__dict__), 'html')
+                        else:
+                            raise ServerError(404, f'dynamic_content: token {param_value} not found (pc)')
+                    else:
+                        raise ServerError(404, f'dynamic_content: problems with name of parameters (pc)')
+                else:
+                    raise ServerError(404, f'dynamic_content: problems with number of url params (pc)')
+                    
+            elif req.path == '/e2r':
+                url_params = req.url.query.split('&')
+                if len(url_params) == 2:
+                    param1_name, param1_value = url_params[0].split('=')
+                    param2_name, param2_value = url_params[1].split('=')
+                    if param1_name == 't' and param2_name == 'w':
+                        book_info = self.app.get_book_info_with_token(param1_value)
+                        if book_info:
+                            page_content = self.app.translate.en2ru(param2_value)
+                            new_router_result = RouterResult(page_content, 'html')
                         else:
                             raise ServerError(404, f'dynamic_content: token {param_value} not found (pc)')
                     else:
