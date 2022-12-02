@@ -5,7 +5,7 @@ import json
 class ViewerApp:
 
     def __init__(self):
-        self.page_avg_char_lengh = 300
+        self.page_avg_char_lengh = 1000
         self.clear_temp_books()
         
     def create_book(self, token, content):

@@ -9,6 +9,9 @@ html {
     border: 2px solid #b0dddc;
     border-radius: 8px;
 	height: 320px;
+	overflow-y: scroll;
+	scrollbar-color: #b0dddc transparent;
+	scrollbar-width: thin;
 }
 
 .but_pan {
