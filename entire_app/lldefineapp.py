@@ -2,7 +2,7 @@
 import datetime
 import json
 
-from toolfuns import md5
+from toolfuns import md5, ffile
 from errors import ServerError
 
 class LLdefineApp:
@@ -28,22 +28,22 @@ class LLdefineApp:
         
     def save_temp_book(self, token, book_text):
         
-        with open('temp_store\\temp_books\\' + token, 'w+', encoding='utf-8') as new_temp_f:
+        with ffile('temp_store/temp_books/' + token).open('w+', encoding='utf-8') as new_temp_f:
             new_temp_f.write(book_text)
         
     def save_into_temp_list(self, client_id, book_name, book_type, book_text, token):
 
-        with open('temp_store\\temp_store_list.json', 'r', encoding='utf-8') as temp_store_list_f:  
+        with ffile('temp_store/temp_store_list.json').open('r', encoding='utf-8') as temp_store_list_f:  
             temp_store_list = json.load(temp_store_list_f)
             if not temp_store_list:
                 temp_store_list = []
             temp_store_list.append({'client': client_id, 'name': book_name, 'type': book_type, 'time': datetime.datetime.now(), 'token': token})
             
-        with open('temp_store\\temp_store_list.json', 'w', encoding='utf-8') as temp_store_list_f:  
+        with ffile('temp_store/temp_store_list.json').open('w', encoding='utf-8') as temp_store_list_f:  
             json.dump(temp_store_list, temp_store_list_f, ensure_ascii=False, default=str)
 
     def clear_temp_list(self):
-        with open('temp_store\\temp_store_list.json', 'w', encoding='utf-8') as temp_store_list_f:  
+        with ffile('temp_store/temp_store_list.json').open('w', encoding='utf-8') as temp_store_list_f:  
             json.dump([], temp_store_list_f, ensure_ascii=False)
 
     def constuct_token(self, client_id, book_name):
@@ -51,7 +51,7 @@ class LLdefineApp:
         
     def get_book_info_with_token(self, token):
     
-        with open('temp_store\\temp_store_list.json', 'r', encoding='utf-8') as temp_store_list_f:  
+        with ffile('temp_store/temp_store_list.json').open('r', encoding='utf-8') as temp_store_list_f:  
             temp_store_list = json.load(temp_store_list_f)
             if temp_store_list:
                 ex_tokens = [x for x in temp_store_list if x['token'] == token]
@@ -65,6 +65,6 @@ class LLdefineApp:
         return None
         
     def read_temp_book(self, token):
-        with open('temp_store\\temp_books\\' + token, 'r', encoding='utf-8') as temp_book:  
+        with ffile('temp_store/temp_books/' + token).open('r', encoding='utf-8') as temp_book:  
             book_text = temp_book.read()
             return book_text

@@ -21,7 +21,7 @@ if __name__ == '__main__':
     grammar_app = GrammarApp()
     
     grammar_app.init_app()
-    #def_lvl_app.init_app()
+    def_lvl_app.init_app()
 
     our_app_instance = LLdefineApp(def_lvl_app, translate_app, grammar_app, viewer_app)
 

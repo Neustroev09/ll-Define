@@ -5,7 +5,7 @@ from email.parser import Parser
 from urllib.parse import parse_qs, urlparse, unquote
 
 from router import Router, RouterResult
-from toolfuns import md5
+from toolfuns import md5, ffile
 from errors import ServerError
 from server_packs import Response, Request
 
@@ -38,6 +38,7 @@ class HTTPServer:
 
         try:
             # пытаемся привязать сервер к хосту и потру
+            serv_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             serv_sock.bind((self._host, self._port))
             # ждем входящие запросы клиентов
             serv_sock.listen()
@@ -72,6 +73,8 @@ class HTTPServer:
         except ServerError as e:
             # если возникает какая-то ошибка ServerError, то она попадает в send_error
             self.send_error(conn, e)
+        finally:
+            print('serve_client: unknown error ...')
 
         # если с соединением все ок, то закрываем его
         if conn:
@@ -213,7 +216,7 @@ class HTTPServer:
         return body_obj
 
     def st(self, source_key):
-        with open('source_translator.json', 'r', encoding='utf-8') as st: 
+        with ffile('source_translator.json').open('r', encoding='utf-8') as st: 
             st_obj = json.load(st)
             if source_key in st_obj:
                 return tuple(st_obj[source_key])
@@ -229,17 +232,17 @@ class HTTPServer:
             site_source = self.st(req.path)
             if site_source:
                 if site_source[0] == 'html':
-                    router_result = self._router.html_page(site_source[1])
+                    router_result = self._router.html_page(ffile(site_source[1]))
                 elif site_source[0] == 'css':
-                    router_result = self._router.styles_file(site_source[1])
+                    router_result = self._router.styles_file(ffile(site_source[1]))
                 elif site_source[0] == 'img':
-                    router_result = self._router.image_file(site_source[1])       
+                    router_result = self._router.image_file(ffile(site_source[1]))       
                 elif site_source[0] == 'fnt':
-                    router_result = self._router.font_file(site_source[1])  
+                    router_result = self._router.font_file(ffile(site_source[1]))  
                 elif site_source[0] == 'js':
-                    router_result = self._router.js_file(site_source[1])
+                    router_result = self._router.js_file(ffile(site_source[1]))
                 elif site_source[0] == 'mp3':
-                    router_result = self._router.mp3_file(site_source[1])
+                    router_result = self._router.mp3_file(ffile(site_source[1]))
 
         if req.method == 'POST':
             if req.path == '/loadbook':
@@ -296,7 +299,7 @@ class HTTPServer:
                         book_info = self.app.get_book_info_with_token(param_value)
                         if book_info:
                             book_text = self.app.read_temp_book(book_info['token'])
-                            new_router_result = RouterResult(self.app.define.define_test(book_text), 'html')
+                            new_router_result = RouterResult(self.app.define.define_level(book_text), 'html')
                         else:
                             raise ServerError(404, f'dynamic_content: token {param_value} not found (deflvl)')
                     else:

@@ -8,12 +8,14 @@ import gensim.downloader
 from nltk.tokenize import RegexpTokenizer
 from catboost import CatBoostClassifier
 
+import pathlib
+
 class DefineLevelApp:
     def __init__(self):
         pass
     
     def init_app(self):
-        with open('deflvl\\CBClf.pkl', 'rb') as file:
+        with pathlib.Path('deflvl/CBClf.pkl').open('rb') as file:
             self.clf = pickle.load(file)
         self.sp = spacy.load('en_core_web_sm')
         self.w2vm = gensim.downloader.load('word2vec-google-news-300')

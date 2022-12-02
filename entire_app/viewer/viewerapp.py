@@ -2,6 +2,8 @@
 import os
 import json
 
+import pathlib
+
 class ViewerApp:
 
     def __init__(self):
@@ -16,12 +18,13 @@ class ViewerApp:
         self.save_book(token, {'sentences': sents_obj, 'pages': pages_obj})
         
     def save_book(self, token, book_content):
-        with open('viewer\\temp_books\\' + token, 'w+', encoding='utf-8') as new_temp_f:
+        with pathlib.Path('viewer/temp_books/' + token).open('w+', encoding='utf-8') as new_temp_f:
             json.dump(book_content, new_temp_f, ensure_ascii=False)
         
     def read_book(self, token):
-        if os.path.isfile('viewer\\temp_books\\' + token):
-            with open('viewer\\temp_books\\' + token, 'r', encoding='utf-8') as temp_store_list_f:  
+        book_path = pathlib.Path('viewer/temp_books/' + token)
+        if book_path.exists():
+            with book_path.open('r', encoding='utf-8') as temp_store_list_f:  
                 return json.load(temp_store_list_f)
         else:
             return None
@@ -80,6 +83,7 @@ class ViewerApp:
             return None
             
     def clear_temp_books(self):
-        dir = 'viewer\\temp_books\\'
-        for f in os.listdir(dir):
-            os.remove(os.path.join(dir, f))
+        pass
+        #dir = 'viewer\\temp_books\\'
+        #for f in os.listdir(dir):
+            #os.remove(os.path.join(dir, f))

@@ -1,4 +1,3 @@
-import io
 
 # результат выполнения методов класса Router
 class RouterResult:
@@ -14,40 +13,40 @@ class Router:
         pass
     
     def html_page(self, page_loc):
-        file = io.open(page_loc, mode='r', encoding='utf-8')
+        file = page_loc.open(mode='r', encoding='utf-8')
         resp_body = file.read()
         file.close()
         return RouterResult(resp_body, 'html')
     
     def styles_file(self, file_loc):
-        file = io.open(file_loc, mode='r', encoding='utf-8')
+        file = file_loc.open(mode='r', encoding='utf-8')
         resp_body = file.read()
         file.close()
         return RouterResult(resp_body, 'css')
         
     def image_file(self, file_loc):
-        file = io.open(file_loc, mode='rb')
+        file = file_loc.open(mode='rb')
         resp_body = file.read()
         file.close()
-        return RouterResult(resp_body, 'img', file_loc.split('.')[-1])
+        return RouterResult(resp_body, 'img', str(file_loc).split('.')[-1])
         
     def font_file(self, file_loc):
-        file = io.open(file_loc, mode='rb')
+        file = file_loc.open(mode='rb')
         resp_body = file.read()
         file.close()
-        return RouterResult(resp_body, 'font', file_loc.split('.')[-1])
+        return RouterResult(resp_body, 'font', str(file_loc).split('.')[-1])
 
     def js_file(self, script_loc):
-        file = io.open(script_loc, mode='r', encoding='utf-8')
+        file = script_loc.open(mode='r', encoding='utf-8')
         resp_body = file.read()
         file.close()
         return RouterResult(resp_body, 'js')
 
     def mp3_file(self, file_loc):
-        file = io.open(file_loc, mode='rb')
+        file = file_loc.open(mode='rb')
         resp_body = file.read()
         file.close()
-        return RouterResult(resp_body, 'mp3', file_loc.split('.')[-1])
+        return RouterResult(resp_body, 'mp3', str(file_loc).split('.')[-1])
     
     # скелет для всех страничек с ошибками
     def error_page(self, status, body):
