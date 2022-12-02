@@ -80,14 +80,25 @@ html {
 
 .ubp_el {
 	display: inline-block;
-	width: 40%;
 	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .ubp_el label {
-	margin-left: 10px;
 	cursor: pointer;
 	user-select: none;
+}
+
+.form-check-input:checked {
+    background-color: #b0dddc;
+    border-color: #b0dddc;
+}
+
+.form-check-input:focus {
+    border-color: b0dddc;
+    outline: none;
+    box-shadow: none;
 }
 
 .cng_page {

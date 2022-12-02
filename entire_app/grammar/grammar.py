@@ -101,6 +101,8 @@ class GrammarApp:
         
     def tenses(self, text):
         
+        rt = text
+        
         f1_r = self.def_tense(text)
         f2_r = self.tok_pos(text)
         
@@ -109,7 +111,24 @@ class GrammarApp:
         for f1_r_e in f1_r:
             for f2_r_e in f2_r:
                 if f1_r_e[0][0][0] in f2_r_e and f1_r_e[0][0][1] in f2_r_e:
-                    real_res.append({'index': [*f2_r_e[:2]], 'tense': f1_r_e[0][1]})
+                    real_res.append({'index': [*f2_r_e[:2]], 'tense': f1_r_e[0][1], 'target': f2_r_e[-1]})
+                    
+        for i in range(len(real_res)):
+            new_indx = rt.find(real_res[i]['target'], real_res[i]['index'][0])
+            if new_indx != -1:
+                real_res[i]['index'] = [new_indx, new_indx + len(real_res[i]['target'])]
+                
+        real_real_res = []
+        for x in real_res:
+            found = False
+            for y in real_real_res:
+                if y['index'][0] == x['index'][0] and y['index'][1] == x['index'][1]:
+                    found = True
+                    break
+            if not found:
+                real_real_res.append(x)        
         
-        return real_res
+        real_real_res.sort(key=lambda x: x['index'][0])
+        
+        return real_real_res
         

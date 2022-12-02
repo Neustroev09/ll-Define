@@ -95,7 +95,7 @@ function some_script(last_book_page) {
 		page_viewer.innerHTML = '';
 		
 		var upper_button_panel = document.createElement('div');
-		upper_button_panel.className = 'upp_but_pan';
+		upper_button_panel.className = 'form-check form-switch upp_but_pan';
 		
 		var translate_button_ch = document.createElement('input'),
 			check_grammar_button_ch = document.createElement('input'),
@@ -104,8 +104,14 @@ function some_script(last_book_page) {
 			translate_button = document.createElement('div'),
 			check_grammar_button = document.createElement('div');
 			
-		translate_button_ch.setAttribute('type', 'checkbox');
-		check_grammar_button_ch.setAttribute('type', 'checkbox');
+        translate_button_ch.className = 'form-check-input';
+        translate_button_ch.setAttribute('type', 'checkbox');
+        translate_button_ch.setAttribute('role', 'switch');
+        translate_button_lb.className = 'form-check-label';
+        check_grammar_button_ch.className = 'form-check-input';
+        check_grammar_button_lb.className = 'form-check-label';
+        check_grammar_button_ch.setAttribute('type', 'checkbox');
+        check_grammar_button_ch.setAttribute('role', 'switch');
 		
 		function swich_to_translate_feature()     { if (check_grammar_button_ch.checked) { check_grammar_button_ch.checked = false } }
 		function swich_to_check_grammar_feature() { if (translate_button_ch.checked)     { translate_button_ch.checked = false } }
@@ -323,7 +329,6 @@ function click_page_sen (word) {
 	var t_param = cur_url[cur_url.length - 1];
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/gr?' + t_param + '&s=' + s_num);
-	console.log('/gr?' + t_param + '&s=' + s_num)
 	xhr.send();
 	xhr.onload = function render_page() {
 		if (xhr.status != 200) {
