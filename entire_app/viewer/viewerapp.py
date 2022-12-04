@@ -8,7 +8,13 @@ class ViewerApp:
 
     def __init__(self):
         self.page_avg_char_lengh = 1000
+        self.create_init_dirs()
         self.clear_temp_books()
+
+    def create_init_dirs(self):
+        pth = pathlib.Path('viewer/temp_books/')
+        if not pth.exists():
+            pth.mkdir(parents=True, exist_ok=True)
         
     def create_book(self, token, content):
         sents = self.split_into_sentenses(content)

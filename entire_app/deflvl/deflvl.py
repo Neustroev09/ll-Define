@@ -11,8 +11,10 @@ from catboost import CatBoostClassifier
 import pathlib
 
 class DefineLevelApp:
-    def __init__(self):
-        pass
+    def __init__(self, init=False):
+        self.init = init
+        if init:
+            self.init_app()
     
     def init_app(self):
         with pathlib.Path('deflvl/CBClf.pkl').open('rb') as file:
@@ -58,14 +60,14 @@ class DefineLevelApp:
         
         
     def define_level(self, text):
-        ptext = self.preprocess_text(text)
-        tokenizer = RegexpTokenizer(r'\w+')
-        tokens = tokenizer.tokenize(text)
-        embeddings = self.get_word2vec_embeddings(self.w2vm, tokens)
-        y_pred = self.clf.predict(embeddings)
-        CEFR = {0: 'A2', 1: 'B1', 2: 'B2', 3: 'C1'}
-        ans = CEFR[int(y_pred)]
-        return ans
-        
-    def define_test(self, text):
-        return 'A1'
+        if self.init:
+            ptext = self.preprocess_text(text)
+            tokenizer = RegexpTokenizer(r'\w+')
+            tokens = tokenizer.tokenize(text)
+            embeddings = self.get_word2vec_embeddings(self.w2vm, tokens)
+            y_pred = self.clf.predict(embeddings)
+            CEFR = {0: 'A2', 1: 'B1', 2: 'B2', 3: 'C1'}
+            ans = CEFR[int(y_pred)]
+            return ans
+        else:
+            return 'C1'

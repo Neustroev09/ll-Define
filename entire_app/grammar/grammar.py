@@ -10,8 +10,10 @@ import re
 
 class GrammarApp:
 
-    def __init__(self):
-        pass
+    def __init__(self, init=True):
+        self.init = init
+        if init:
+            self.init_app()
         
     def init_app(self):
         nltk.download('punkt')

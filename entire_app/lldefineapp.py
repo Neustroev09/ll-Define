@@ -11,7 +11,13 @@ class LLdefineApp:
         self.translate = translate_app
         self.viewer = view_app
         self.grammar = grammar_app
+        self.create_init_dirs()
         self.clear_temp_list()
+        
+    def create_init_dirs(self):
+        pth = ffile('temp_store/temp_books/')
+        if not pth.exists():
+            pth.mkdir(parents=True, exist_ok=True)
 
     def load_book(self, client_id, book_name, book_type, book_text):
         
