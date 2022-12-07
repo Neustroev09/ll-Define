@@ -27,7 +27,7 @@
 <body class="bodyStyle" onload="downloadCard()">
     <nav class="navbar navbar-expand-lg navbar-light bg-white headerToolbar">
         <div class="container-fluid">            
-            <p class="navbar-brand logoName offset-1"><img src="../r/p1.png" class="logoImg">II Define</p>
+            <a class="navbar-brand logoName offset-1" href="/"><img src="../r/p1.png" class="logoImg">II Define</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" 
                                 aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@
                     </li>
                 </ul>
 
-                <form class="signinButton d-flex">
+                <form class="signinButton d-flex" href="/">
                     <button class="btn signinButton">Login</button>
                 </form>
             </div>
@@ -63,12 +63,14 @@
     </nav>
 
     
-    <span class="titlePageGlob">
-        <h2>Подборка книг на английском языке</h2>
-    </span>
+    <div class="container-fluid"> 
+        <span class="titlePageGlob">
+            <h2>Подборка книг на английском языке</h2>
+        </span>
+    </div>
 
     <span class="titlePage btnOffCanvas">
-        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onclick="crateOffCanvas()">
+        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onclick="openOffCanvas()">
             Открыть Фильтры
         </button>
     </span>

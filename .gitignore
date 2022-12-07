@@ -1,3 +1,5 @@
 .idea/
 entire_app/__pycache__/
 entire_app/deflvl/__pycache__/
+entire_app/grammar/__pycache__/
+entire_app/translate/__pycache__/

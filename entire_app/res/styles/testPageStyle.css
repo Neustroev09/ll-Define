@@ -8,9 +8,18 @@
 
 .testExerciseTitle {
   margin: auto;
+  margin-bottom: 9px;
   font-family: Montserrat-Bold;
   font-weight: 800;
   font-size: 22px;
+  text-align: center;
+}
+
+.testExerciseDescription {
+  margin: auto;
+  font-family: Montserrat-Regular;
+  font-weight: 400;
+  font-size: 17px;
   text-align: center;
 }
 
@@ -106,7 +115,7 @@
   color: #000;
   background-color: #fff;
   border-color: #000;
-  box-shadow: 0 0 10px 0.2rem #b0dddc;
+  box-shadow: 0 0 10px 0.1rem #b0dddc;
 }
 
 option {

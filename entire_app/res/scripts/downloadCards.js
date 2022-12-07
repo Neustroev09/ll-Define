@@ -75,6 +75,8 @@ var books =
 };
 
 var maxCountBooksInPage = 8;
+var filterBlock = document.querySelector(".filterBlock");
+var cloneBlock = filterBlock.cloneNode(true);
 
 function downloadCard(numberPage=0) {
     for (let i = 0; i < maxCountBooksInPage; ++i) {
@@ -173,21 +175,41 @@ function filter() {
         emptyPage = true
     }
 
-    /// TODO фильтр должен быть последовательным
     var checkObjList = document.querySelectorAll('#genreCheck');
+    let checkGenre = Array();
     for (let i = 0; i < checkObjList.length; ++i) {
         if (checkObjList[i].checked) {
-            filterCheck(booksId, checkObjList[i].value, "genre");
+            checkGenre.push.apply(checkGenre, filterCheck(checkObjList[i].value, "genre"));
             emptyPage = true
         }
     }
 
+    // TODO: вынести в отдельную функцию
+    let intersection;
+    if (booksId.length != 0  && checkGenre.length != 0) {
+        intersection = booksId.filter(x => checkGenre.includes(x));
+        booksId.splice(0, booksId.length);
+        booksId.push.apply(booksId, intersection);
+    } else {
+        booksId.push.apply(booksId, checkGenre);
+    }
+
     var checkObjList = document.querySelectorAll('#difficultyCheck');
+    let checkDifficulty = Array();
     for (let i = 0; i < checkObjList.length; ++i) {
         if (checkObjList[i].checked) {
-            filterCheck(booksId, checkObjList[i].value, "difficulty");
+            checkDifficulty.push.apply(checkDifficulty, filterCheck(checkObjList[i].value, "difficulty"));
             emptyPage = true
         }
+    }
+
+    // TODO: вынести в отдельную функцию
+    if (booksId.length != 0 && checkDifficulty.length != 0) {
+        intersection = booksId.filter(x => checkDifficulty.includes(x));
+        booksId.splice(0, booksId.length);
+        booksId.push.apply(booksId, intersection);
+    } else {
+        booksId.push.apply(booksId, checkDifficulty);
     }
 
     if (!emptyPage) {
@@ -209,20 +231,19 @@ function filterByTitleAuthor(booksId, nameInput) {
     }
 }
 
-function filterCheck(booksId, checkValue, checkKey) {
+function filterCheck(checkValue, checkKey) {
+    let booksIdCheck = new Array();
     for (const [key, value] of Object.entries(books)) {
         if (value[checkKey] == checkValue) {
-            booksId.push(key);
+            booksIdCheck.push(key);
         }
     }
+    return booksIdCheck;
 }
 
-function crateOffCanvas() {
+function openOffCanvas() {
     var offCanvasBody = document.querySelector(".offcanvas-body");
     offCanvasBody.innerHTML = '';
-    
-    var filterBlock = document.querySelector(".filterBlock");
-    var cloneBlock = filterBlock.cloneNode(true);
     cloneBlock.style.display = '';
     cloneBlock.className = 'filterBlockOff';
     offCanvasBody.appendChild(cloneBlock);    
