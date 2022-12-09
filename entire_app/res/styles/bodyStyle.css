@@ -23,11 +23,9 @@
 }
 
 .dashImg {
-    /* width: 380px;
-    height: 21px; */
-    max-width: 330px;
+    max-width: 325px;
     max-height: 21px;
-    min-width: 330px;
+    min-width: 325px;
     min-height: 21px;
 }
 
@@ -46,7 +44,7 @@
 }
 
 .laptopAndPhone {
-    min-width: 380px;
+    min-width: 370px;
     min-height: 320px;
     max-width: 725px;
     max-height: 725px;
@@ -98,6 +96,10 @@
 
 .functionalItem div {
     padding: 1% 8% 2% 8%;
+}
+
+.functionalItem a {
+    text-decoration: none;
 }
 
 .functionalItemHeader {

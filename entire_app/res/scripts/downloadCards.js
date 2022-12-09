@@ -1,6 +1,6 @@
 var books = 
  {
-    0 : {
+    1 : {
         "author" : "Л. Кэрролл",
         "title" : "Алиса в стране чудес",
         "img" : "/r/p14.png",
@@ -8,7 +8,7 @@ var books =
         "difficulty" : "B2",
         "genre" : "Фантастика"
     },
-    1 : {
+    2 : {
         "author" : "О. Уайлд",
         "title" : "Портрет Дориана Грея",
         "img" : "/r/p15.png",
@@ -16,7 +16,7 @@ var books =
         "difficulty" : "C2",
         "genre" : "Фантастика"
     },
-    2 : {
+    3 : {
         "author" : "Г. Х. Андерсен",
         "title" : "Русалочка",
         "img" : "/r/p16.png",
@@ -24,7 +24,7 @@ var books =
         "difficulty" : "B1",
         "genre" : "Сказка" 
     },
-    3 : {
+    4 : {
         "author" : "Б. Гримм",
         "title" : "Рапунцель",
         "img" : "/r/p17.png",
@@ -32,7 +32,7 @@ var books =
         "difficulty" : "A1",
         "genre" : "Сказка"
     },
-    4 : {
+    5 : {
         "author" : "В. Гауфф",
         "title" : "История о корабле призраке",
         "img" : "/r/p18.png",
@@ -40,7 +40,7 @@ var books =
         "difficulty" : "A2",
         "genre" : "Ужасы"
     },
-    5 : {
+    6 : {
         "author" : "Л. Ф. Баум",
         "title" : "Волшебник страны Оз",
         "img" : "/r/p19.png",
@@ -48,7 +48,7 @@ var books =
         "difficulty" : "A2",
         "genre" : "Приключения" 
     },
-    6 : {
+    7 : {
         "author" : "Д. Дефо",
         "title" : "Робинзон Крузо",
         "img" : "/r/p20.png",
@@ -56,7 +56,7 @@ var books =
         "difficulty" : "C1",
         "genre" : "Приключения"
     },
-    7 : {
+    8 : {
         "author" : "Б. Гримм",
         "title" : "Ганзель и Гретель",
         "img" : "/r/p21.png",
@@ -64,7 +64,7 @@ var books =
         "difficulty" : "A1",
         "genre" : "Сказка"
     },
-    8 : {
+    9 : {
         "author" : "Г. Лавкрафт",
         "title" : "Хребты безумия",
         "img" : "/r/p22.png",
@@ -75,12 +75,40 @@ var books =
 };
 
 var maxCountBooksInPage = 8;
+var currentPage = 1;
+var booksId = new Array();
 var filterBlock = document.querySelector(".filterBlock");
 var cloneBlock = filterBlock.cloneNode(true);
 
-function downloadCard(numberPage=0) {
-    for (let i = 0; i < maxCountBooksInPage; ++i) {
-        createCard(i);
+function openPage(numberPage=1) {
+    currentPage = numberPage;
+    let pageBtn = "page" + numberPage;
+    document.getElementById("page1").className = "page-item";
+    document.getElementById("page2").className = "page-item";
+    document.getElementById("page3").className = "page-item";
+    document.getElementById(pageBtn).className = "page-item active";
+    clearCard();
+    downloadCard(numberPage);
+}
+
+function prevBtn() {
+    if (currentPage - 1 > 0) {
+        openPage(currentPage-1);
+    }
+}
+
+function nextBtn() {
+    if (currentPage + 1 < 4) {
+        openPage(currentPage+1);
+    }
+}
+
+function downloadCard(numberPage=1) {
+    for (let i = 1; i <= maxCountBooksInPage; ++i) {
+        let key = i+(numberPage-1)*maxCountBooksInPage;
+        if (books[key] === undefined)
+            break; 
+        createCard(key);
     }
 
     if (document.documentElement.scrollWidth < 1000) {
@@ -166,7 +194,6 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
 
 
 function filter() {
-    var booksId = new Array();
     var emptyPage = false;
 
     var nameInput = document.querySelector('.inputText').value; 
@@ -214,7 +241,7 @@ function filter() {
 
     if (!emptyPage) {
         clearCard()
-        downloadCard();
+        downloadCard(1);
     } else {
         updateCard(booksId);
     }
@@ -258,3 +285,7 @@ window.addEventListener('resize', function(event) {
         document.querySelector(".btnOffCanvas").style.display = 'none';
     }
 }, true);
+
+function isNumber(n) { 
+    return /^-?[\d.]+(?:e-?\d+)?$/.test(n); 
+} 
