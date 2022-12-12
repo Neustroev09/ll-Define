@@ -55,6 +55,10 @@ col {
     border: solid 1px #b0dddc !Important;
 }
 
+.pagination a:focus {
+    box-shadow: none;
+}
+
 .modal-dialog {
     top: 25%;
     transform: translate(-50%,-50%);

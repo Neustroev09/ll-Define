@@ -125,8 +125,8 @@
                         <label class="form-check-label" for="flexCheckDefault">Ужасы</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Биография" id="genreCheck">
-                        <label class="form-check-label" for="flexCheckDefault">Биография</label>
+                        <input class="form-check-input" type="checkbox" value="Фэнтези" id="genreCheck">
+                        <label class="form-check-label" for="flexCheckDefault">Фэнтези</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="Драма" id="genreCheck">
@@ -181,8 +181,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modalBody"></div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="readButton">Читать</button>
+                <div class="modal-footer d-flex justify-content-evenly" id="modalFooter">
+                    <!-- <button class="readButton">Читать</button> -->
+                    <span id="modalFooterDifficulty"></span>
+                    <span id="modalFooterGenre"></span>
                 </div>
             </div>
         </div>
@@ -192,7 +194,7 @@
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item">
+            <li class="page-item" id="pagePrev">
                 <a class="page-link" href="#" aria-label="Previous" onclick="prevBtn()">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
@@ -201,7 +203,7 @@
                 <li class="page-item" id="page2"><a class="page-link" href="#page=2" onclick="openPage(2)">2</a></li>
                 <li class="page-item" id="page3"><a class="page-link" href="#page=3" onclick="openPage(3)">3</a></li>
                 <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next" onclick="nextBtn()">
+                <a class="page-link" id="pageNext" href="#" aria-label="Next" onclick="nextBtn()">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
